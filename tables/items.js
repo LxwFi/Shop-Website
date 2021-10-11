@@ -17,55 +17,55 @@ const Categories = require("./categories")
                 imageUrl VARCHAR(255)
             )`);
         });
+     }
+     dbAll(sql , p = []) {
+        return new Promise((resolve, reject) => {
+            this.database.all(sql, p, (err, rows) => {
+                if (err) {reject(err);}
+                resolve(rows);
+            });
+        });
     }
     async add(title, price, desc, cat, imageUrl) {
         // Takes in the item params and adds it to the databse
         const Category = new Categories(this.database);
         await Category.add(cat);  // Creates a category if it doesn't exist
-        this.database.serialize(() => {
-            this.database.run(`
-                INSERT INTO Items
-                (title, price, desc, category, imageUrl)
-                VALUES ((?),(?),(?),
-                (SELECT id FROM Categories WHERE category = (?)), (?))`,
-                    [title, price, desc, cat, imageUrl])
-        }); // Inserts new item  into the databse
+        const [exist] = await this.dbAll("SELECT id FROM Items WHERE title = (?) AND category = (SELECT id FROM Category WHERE category = (?))",
+            [title, cat])
+        if (typeof exist === 'undefined') {
+            this.database.serialize(() => {
+                this.database.run(`
+                    INSERT INTO Items
+                    (title, price, desc, category, imageUrl)
+                    VALUES ((?),(?),(?),
+                    (SELECT id FROM Categories WHERE category = (?)), (?))`,
+                        [title, price, desc, cat, imageUrl])
+            }); // Inserts new item  into the databse
+        } 
     }
-    async remove(title, cat) {
+    async remove(id) {
         // Takes in the param of an item title and category
         // Checks if it exists and if does, removes it from database
-        await this.database.all("SELECT id FROM Items WHERE title = (?) AND cat = (SELECT id FROM Categories WHERE category = (?))",
-            [title, cat], (err, rows) => {
-                if (err) {
-                    throw err;
-                };
-                if (rows.length === 0) { // Checks if item doesn't exist
-                    throw "Doesn't exist!";
-                }
-                this.database.serialize(() => {
-                    this.database.run(`
-                    DELETE FROM Items WHERE id = (?)`,
-                        [rows[0]]); // Deletes item from database
-                });
+        const [exist] = await this.dbAll("SELECT * FROM Items WHERE id = (?)",
+            [id])
+        if (typeof exist !== 'undefined') {
+            this.database.serialize(() => {
+                this.database.run(`
+                DELETE FROM Items WHERE id = (?)`, [id])
             });
+        }
+        
     }
-    async descChange(title, cat, newDesc) {
+    async descChange(id, newDesc) {
         // Takes in an items title and category with a new description
         // Changes the items description if it exists
-        await this.database.all("SELECT id FROM Items WHERE title = (?) AND cat = (SELECT id FROM Categories WHERE category = (?))",
-            [title, cat], (err, rows) => {
-                if (err) {
-                    throw err;
-                };
-                if (rows.length === 0) { // Checks if doesn't exist
-                    throw "Doesn't exist!";
-                }
-                this.database.serialize(() => {
-                    this.database.run(`
-                    UPDATE Items SET desc = (?) WHERE id = (?)`,
-                        [newDesc, rows[0]]); // Updates items new description
-                });
+        const [exist] = await this.dbAll("SELECT * FROM Items WHERE id = (?)", [id]);
+        if (typeof exist !== 'undefined') {
+            this.database.serialize(() => {
+                this.database.run(`
+                UPDATE Items SET desc = (?) WHERE id = (?)`, [newDesc, id])
             });
+        }
     }
 }
 

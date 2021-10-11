@@ -12,37 +12,36 @@ class Basket {
             )`);
         });
     }
+    dbAll(sql , p = []) {
+        return new Promise((resolve, reject) => {
+            this.database.all(sql, p, (err, rows) => {
+                if (err) {reject(err);}
+                resolve(rows);
+            });
+        });
+    }
     async add(item) {
         // Takes in the param of the id of item being added to basket
-        await this.database.all("SELECT * FROM Basket WHERE item = (?)",
-            [item], (err, rows) => {
-                if (err) {
-                    throw err;
-                };
-                if (rows.length === 0) { // If item not already in basket
-                    this.database.serialize(() => {
-                        this.database.run(`
-                        INSERT INTO Basket (item) VALUES ((?))`,
-                            [item]); // Adds item to basket table
-                    });
-                }
-            });
+        if (isNaN(item)){throw "Is not a number"}
+        const [exist] = await this.dbAll("SELECT * FROM Basket WHERE item = (?)", [item])
+        const [it] = await this.dbAll("SELECT * FROM Items WHERE id = (?)", [item])
+        if (typeof exist === 'undefined' && typeof it !== 'undefined' ) {
+            this.database.serialize(() => {
+                this.database.run(`
+                INSERT INTO Basket (item) VALUES ((?))`, [item])
+            })
+        }
     }
     async remove(item) {
         // Takes in the param of the id of item being removed from basket
-        await this.database.all("SELECT * FROM Basket WHERE item = (?)",
-            [item], (err, rows) => {
-                if (err) {
-                    throw err;
-                };
-                if (rows.length === 1) { // If item is in basket
-                    this.database.serialize(() => {
-                        this.database.run(`
-                        DELETE FROM Basket WHERE item = (?)`,
-                            [item]); // Removes item from basket table
-                    });
-                }
-            });
+        if (isNaN(item)) { throw "Is not a number" }
+        const [exist] = await this.dbAll("SELECT * FROM Basket WHERE item = (?)", [item])
+        if (typeof exist !== 'undefined') {
+            this.database.serialize(() => {
+                this.database.run(`
+                DELETE FROM Basket WHERE item = (?)`, [item])
+            })
+        }
     }
 }
 
