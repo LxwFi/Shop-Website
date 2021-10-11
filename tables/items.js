@@ -1,8 +1,8 @@
 const sqlite3 = require("sqlite3").verbose();
 const Categories = require("./categories")
 
- class Items {
-     constructor(database) {
+class Items {
+    constructor(database) {
         // Takes in database connection to run SQL to database
         // Creates the table of items if doesn't exist already
         this.database = database;
@@ -17,11 +17,11 @@ const Categories = require("./categories")
                 imageUrl VARCHAR(255)
             )`);
         });
-     }
-     dbAll(sql , p = []) {
+    }
+    dbAll(sql, p = []) {
         return new Promise((resolve, reject) => {
             this.database.all(sql, p, (err, rows) => {
-                if (err) {reject(err);}
+                if (err) { reject(err); }
                 resolve(rows);
             });
         });
@@ -39,9 +39,9 @@ const Categories = require("./categories")
                     (title, price, desc, category, imageUrl)
                     VALUES ((?),(?),(?),
                     (SELECT id FROM Categories WHERE category = (?)), (?))`,
-                        [title, price, desc, cat, imageUrl])
+                    [title, price, desc, cat, imageUrl])
             }); // Inserts new item  into the databse
-        } 
+        }
     }
     async remove(id) {
         // Takes in the param of an item title and category
@@ -54,7 +54,7 @@ const Categories = require("./categories")
                 DELETE FROM Items WHERE id = (?)`, [id])
             });
         }
-        
+
     }
     async descChange(id, newDesc) {
         // Takes in an items title and category with a new description
@@ -66,10 +66,13 @@ const Categories = require("./categories")
                 UPDATE Items SET desc = (?) WHERE id = (?)`, [newDesc, id])
             });
         }
-     }
-     async all(category) {
-        const its = await this.dbAll("SELECT * FROM Items WHERE category = (SELECT id FROM Categories WHERE category = (?))", [category])
-        return its
+    }
+    async all(category = 0) {
+        if (category == 0) {
+            return await this.dbAll("SELECT * FROM Items")
+        }
+            return await this.dbAll("SELECT * FROM Items WHERE category = (SELECT id FROM Categories WHERE category = (?))", [category])
+
     }
 }
 
