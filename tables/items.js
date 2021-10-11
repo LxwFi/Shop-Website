@@ -74,10 +74,6 @@ class Items {
             return await this.dbAll("SELECT * FROM Items WHERE category = (SELECT id FROM Categories WHERE category = (?))", [category])
 
     }
-    async everything(){
-        const its = await this.dbAll("SELECT * FROM Items");
-        return its;
-    }
 
     
 }
