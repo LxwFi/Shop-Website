@@ -13,7 +13,7 @@ class Categories {
             )`);
         });
     }
-    add(category) {
+    async add(category) {
         // Takes in the param of the name of category to add
         await database.all("SELECT id FROM Categories WHERE category = (?)",
             [category],
@@ -34,7 +34,7 @@ class Categories {
                 else { throw "Already exists!" }
             });
     }
-    remove(category) {
+    async remove(category) {
         // Takes in the param of the name of category to delete
         await database.all("SELECT id FROM Categories WHERE category = (?)",
             [category],

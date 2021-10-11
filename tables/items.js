@@ -1,8 +1,8 @@
 const sqlite3 = require("sqlite3").verbose();
 const Categories = require("./categories")
 
-class Items {
-    constructor(database) {
+ class Items {
+     constructor(database) {
         // Takes in database connection to run SQL to database
         // Creates the table of items if doesn't exist already
         this.database = database;
@@ -18,7 +18,7 @@ class Items {
             )`);
         });
     }
-    add(title, price, desc, cat, imageUrl) {
+    async add(title, price, desc, cat, imageUrl) {
         // Takes in the item params and adds it to the databse
         await this.database.all("SELECT id FROM Categories WHERE category = (?)",
             [cat],
@@ -40,7 +40,7 @@ class Items {
                 }); // Inserts new item  into the databse
             });
     }
-    remove(title, cat) {
+    async remove(title, cat) {
         // Takes in the param of an item title and category
         // Checks if it exists and if does, removes it from database
         await this.database.all("SELECT id FROM Items WHERE title = (?) AND cat = (SELECT id FROM Categories WHERE category = (?))",
@@ -58,7 +58,7 @@ class Items {
                 });
             });
     }
-    descChange(title, cat, newDesc) {
+    async descChange(title, cat, newDesc) {
         // Takes in an items title and category with a new description
         // Changes the items description if it exists
         await this.database.all("SELECT id FROM Items WHERE title = (?) AND cat = (SELECT id FROM Categories WHERE category = (?))",

@@ -7,6 +7,10 @@ const Handlebars = require("handlebars");
 const expressHandlebars = require("express-handlebars");
 let rawdata = fs.readFileSync(path.resolve(__dirname, 'seed.json'));
 let data = JSON.parse(rawdata);
+const Items = require("./tables/items");
+const db = new sqlite3.Database("data.db");
+const item = new Items(db)
+
 
 const {
     allowInsecurePrototypeAccess,
@@ -26,7 +30,10 @@ web.get("/", (req, res) => {
     res.sendStatus(200);
 });
 
+web.get("/create", (req, res) =>{
+   
 
+});
 
 web.post("", (req, res) => {
     if (q) {
@@ -48,7 +55,7 @@ web.delete("", (req, res) => {
 
 
 
-console.log(data);
+console.log(data.title);
 
 web.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);

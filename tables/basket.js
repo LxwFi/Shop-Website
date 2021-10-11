@@ -12,7 +12,7 @@ class Basket {
             )`);
         });
     }
-    add(item) {
+    async add(item) {
         // Takes in the param of the id of item being added to basket
         await this.database.all("SELECT * FROM Basket WHERE item = (?)",
             [item], (err, rows) => {
@@ -28,7 +28,7 @@ class Basket {
                 }
             });
     }
-    remove(item) {
+    async remove(item) {
         // Takes in the param of the id of item being removed from basket
         await this.database.all("SELECT * FROM Basket WHERE item = (?)",
             [item], (err, rows) => {
