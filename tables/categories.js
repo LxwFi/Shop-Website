@@ -15,7 +15,7 @@ class Categories {
     }
     async add(category) {
         // Takes in the param of the name of category to add
-        await database.all("SELECT id FROM Categories WHERE category = (?)",
+        await this.database.all("SELECT id FROM Categories WHERE category = (?)",
             [category],
             (err, rows) => {
                 if (err) {
@@ -36,7 +36,7 @@ class Categories {
     }
     async remove(category) {
         // Takes in the param of the name of category to delete
-        await database.all("SELECT id FROM Categories WHERE category = (?)",
+        await this.database.all("SELECT id FROM Categories WHERE category = (?)",
             [category],
             (err, rows) => {
                 if (err) {

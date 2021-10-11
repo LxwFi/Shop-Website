@@ -9,9 +9,10 @@ let rawdata = fs.readFileSync(path.resolve(__dirname, 'seed.json'));
 let data = JSON.parse(rawdata);
 const sqlite3 = require("sqlite3");
 const Items = require("./tables/items");
+const Categories = require("./tables/categories");
 const db = new sqlite3.Database("data.db");
-const item = new Items(db)
-
+const item = new Items(db);
+const category = new Categories(db);
 
 const {
     allowInsecurePrototypeAccess,
@@ -50,10 +51,8 @@ web.delete("", (req, res) => {
 });
 
 for (i of data) {
-    fetch("localhost:3000", {
-        method: "POST",
-        body: i
-    })
+    const { title, price, description, category, image } = i
+    item.add(title, price, description, category, image);
 }
 
 
