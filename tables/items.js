@@ -67,8 +67,8 @@ const Categories = require("./categories")
             });
         }
      }
-     async all() {
-        const its = await this.dbAll("SELECT * FROM Items")
+     async all(category) {
+        const its = await this.dbAll("SELECT * FROM Items WHERE category = (SELECT id FROM Categories WHERE category = (?))", [category])
         return its
     }
 }
