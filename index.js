@@ -36,6 +36,8 @@ web.get("/create", (req, res) => {
 
 });
 
+
+
 web.post("/items", (req, res) => {
     const { title, price, description, category, image } = req.body
     if (!title || !price || !description || !category || !image) {
@@ -44,6 +46,10 @@ web.post("/items", (req, res) => {
     item.add(title, price, description, category, image);
     res.sendStatus(200);
 });
+
+for (each of data){
+    fetch("localhost:3000/items")
+}
 
 web.delete("", (req, res) => {
 
