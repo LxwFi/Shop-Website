@@ -60,6 +60,7 @@ async function runThis() {
     }
 }
 
+item.all()
 
 web.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);

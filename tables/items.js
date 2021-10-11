@@ -66,6 +66,10 @@ const Categories = require("./categories")
                 UPDATE Items SET desc = (?) WHERE id = (?)`, [newDesc, id])
             });
         }
+     }
+     async all() {
+        const its = await this.dbAll("SELECT * FROM Items")
+        return its
     }
 }
 
