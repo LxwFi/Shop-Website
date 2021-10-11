@@ -40,46 +40,23 @@
     <br> 
 
 
-    
-        /*
-        <div class="row">
-            <div class="column">
-            <div class="card"><img src="https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_.jpg"><div class="card-body">Item name</div></div>
-            </div>
-            <div class="column">
-            <div class="card"><img src="https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg"><div class="card-body">Item name</div></div>
-            </div>
-            <div class="column">
-            <div class="card"><img src="https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg"><div class="card-body">Item name</div></div>
-            </div>
-            <div class="column">
-                <div class="card"><img src="https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"><div class="card-body">Item name</div></div>
-            </div>
-            <div class="column">
-                <div class="card"><img src="https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg"><div class="card-body">Item name</div></div>
-            </div>
-        </div>
-        */
+
         
-      <script>
-    
-          /* Replace rows and cards with this when handlebars is setup
+        {{#each item}}
+            {{this}}
+        {{/each}}
 
-            <div class="row">
-            {{#each companies}}
 
-                <div class="column">
-
-                    <a href="/{{this.id}}">
-                        <div class="card"><img src="{{this.productImg}}"><div class="card-body>{{this.productName}}</div>
-                    </a>
-
-                </div>  
-
-            {{/each}}
-          */
-
-     </script>
+        <div class="row">
+        {{#each items}}
+            <div class="column">
+                <a href="/{{this.id}}">
+                    <div class="card"><img src="{{this.imageUrl}}"><div class="card-body">{{this.id}}</div></div>
+                </a>
+            </div>  
+        {{/each}}
+        </div>
+          
 
 
 </Body>   

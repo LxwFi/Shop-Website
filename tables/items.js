@@ -71,6 +71,12 @@ const Categories = require("./categories")
         const its = await this.dbAll("SELECT * FROM Items WHERE category = (SELECT id FROM Categories WHERE category = (?))", [category])
         return its
     }
+    async everything(){
+        const its = await this.dbAll("SELECT * FROM Items");
+        return its;
+    }
+
+    
 }
 
 module.exports = Items;

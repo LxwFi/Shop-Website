@@ -13,6 +13,7 @@ const Categories = require("./tables/categories");
 const db = new sqlite3.Database("data.db");
 const item = new Items(db);
 const cat = new Categories(db);
+app.use(express.static(path.join(__dirname, '/views')));
 
 const {
     allowInsecurePrototypeAccess,
@@ -28,8 +29,10 @@ web.use(express.urlencoded({ extended: true }));
 web.use(express.json());
 web.use(express.static('public'));
 
-web.get("/home", (req, res) => {
-    res.render("home");
+web.get("/home", async (req, res) => {
+    const items = await item.everything();
+    console.log(items);
+    res.render("home", {items});
 })
 
 web.get("/", (req, res) => {
@@ -59,6 +62,8 @@ async function runThis() {
         await item.add(title, price, description, category, image);
     }
 }
+
+
 
 web.listen(port, async () => {
     console.log(`Server listening at http://localhost:${port}`);
