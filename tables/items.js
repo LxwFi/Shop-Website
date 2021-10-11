@@ -20,25 +20,16 @@ const Categories = require("./categories")
     }
     async add(title, price, desc, cat, imageUrl) {
         // Takes in the item params and adds it to the databse
-        await this.database.all("SELECT id FROM Categories WHERE category = (?)",
-            [cat],
-            (err, rows) => {
-                if (err) {
-                    throw err;
-                };
-                if (rows.length === 0) { // Check if category exists
-                    const Category = new Categories(this.database);
-                    Category.add(cat);  // Creates a category if it doesn't exist
-                };
-                this.database.serialize(() => {
-                    this.database.run(`
-                    INSERT INTO Items
-                    (title, price, desc, category, imageUrl)
-                    VALUES ((?),(?),(?),
-                    (SELECT id FROM Categories WHERE category = (?)), (?))`,
-                        [title, price, desc, cat, imageUrl])
-                }); // Inserts new item  into the databse
-            });
+        const Category = new Categories(this.database);
+        await Category.add(cat);  // Creates a category if it doesn't exist
+        this.database.serialize(() => {
+            this.database.run(`
+                INSERT INTO Items
+                (title, price, desc, category, imageUrl)
+                VALUES ((?),(?),(?),
+                (SELECT id FROM Categories WHERE category = (?)), (?))`,
+                    [title, price, desc, cat, imageUrl])
+        }); // Inserts new item  into the databse
     }
     async remove(title, cat) {
         // Takes in the param of an item title and category

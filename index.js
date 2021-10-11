@@ -12,7 +12,7 @@ const Items = require("./tables/items");
 const Categories = require("./tables/categories");
 const db = new sqlite3.Database("data.db");
 const item = new Items(db);
-const category = new Categories(db);
+const cat = new Categories(db);
 
 const {
     allowInsecurePrototypeAccess,
@@ -50,10 +50,13 @@ web.delete("", (req, res) => {
 
 });
 
-for (i of data) {
-    const { title, price, description, category, image } = i
-    item.add(title, price, description, category, image);
+async function runThis() {
+    for (i of data) {
+        const { title, price, description, category, image } = i
+        await item.add(title, price, description, category, image);
+    }
 }
+runThis();
 
 
 web.listen(port, () => {

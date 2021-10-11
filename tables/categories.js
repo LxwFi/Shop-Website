@@ -13,26 +13,24 @@ class Categories {
             )`);
         });
     }
+    dbAll(sql , p = []) {
+        return new Promise((resolve, reject) => {
+            this.database.all(sql, p, (err, rows) => {
+                if (err) {reject(err);}
+                resolve(rows);
+            });
+        });
+    }
     async add(category) {
         // Takes in the param of the name of category to add
-        await this.database.all("SELECT id FROM Categories WHERE category = (?)",
-            [category],
-            (err, rows) => {
-                if (err) {
-                    throw err;
-                };
-                if (rows.length === 0) { // Checks if category doesn't exist
-                    this.database.serialize(() => {
-                        this.database.run(`
-                        INSERT INTO Categories
-                        (category)
-                        VALUES ((?))
-                        `, [category]);
-                    });
-                    return
-                }
-                else { throw "Already exists!" }
+        const [cat] = await this.dbAll("SELECT * FROM Categories WHERE category = (?)", [category])
+        if (typeof cat === 'undefined') {
+            this.database.serialize(() => {
+                this.database.run(`
+                INSERT INTO Categories (category) VALUES
+                ((?))`, [category]);
             });
+        }
     }
     async remove(category) {
         // Takes in the param of the name of category to delete
