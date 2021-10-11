@@ -50,6 +50,13 @@ web.delete("", (req, res) => {
 
 });
 
+async function runThis() {
+    for (i of data) {
+        const { title, price, description, category, image } = i
+        await item.add(title, price, description, category, image);
+    }
+}
+
 
 web.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
