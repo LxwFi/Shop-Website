@@ -26,11 +26,8 @@ web.set("view engine", "handlebars");
 web.set('views', path.join(__dirname, 'views'));
 web.use(express.urlencoded({ extended: true }));
 web.use(express.json());
-web.use(express.static('public'));
 
-web.get("/home", (req, res) => {
-    res.render("home");
-})
+
 
 web.get("/", (req, res) => {
     res.render('home');
