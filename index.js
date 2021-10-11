@@ -36,8 +36,6 @@ web.get("/create", (req, res) => {
 
 });
 
-
-
 web.post("/items", (req, res) => {
     const { title, price, description, category, image } = req.body
     if (!title || !price || !description || !category || !image) {
@@ -47,23 +45,17 @@ web.post("/items", (req, res) => {
     res.sendStatus(200);
 });
 
-for (each of data){
-    fetch("localhost:3000/items")
-}
-
 web.delete("", (req, res) => {
 
 });
 
+for (i of data) {
+    fetch("localhost:3000", {
+        method: "POST",
+        body: i
+    })
+}
 
-
-
-
-
-
-
-
-console.log(data[1]);
 
 web.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
