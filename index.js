@@ -30,7 +30,7 @@ web.use(express.json());
 web.use(express.static('public'));
 
 web.get("/home", async (req, res) => {
-    const items = await item.everything();
+    const items = await item.all();
     console.log(items);
     res.render("home", {items});
 })
