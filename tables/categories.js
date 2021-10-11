@@ -42,10 +42,6 @@ class Categories {
             });
         }
     }
-    async all() {
-        const its = await this.dbAll("SELECT * FROM Items")
-        return its
-    }
 }
 
 module.exports = Categories;
