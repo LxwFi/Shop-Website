@@ -13,7 +13,7 @@ const Categories = require("./tables/categories");
 const db = new sqlite3.Database("data.db");
 const item = new Items(db);
 const cat = new Categories(db);
-app.use(express.static(path.join(__dirname, '/views')));
+web.use(express.static(path.join(__dirname, '/views')));
 
 const {
     allowInsecurePrototypeAccess,
