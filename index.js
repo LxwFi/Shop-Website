@@ -50,7 +50,15 @@ web.post("/items", (req, res) => {
     res.sendStatus(200);
 });
 
-web.delete("", (req, res) => {
+
+web.delete("/delete/:id", (req, res) => {
+    if (req.params.id){
+        cart.remove(req.params.id);
+        console.log("Deleting from cart with id " + req.params.id);
+        res.sendStatus(200);
+        return;
+    }
+    res.sendStatus(400);
 
 });
 
