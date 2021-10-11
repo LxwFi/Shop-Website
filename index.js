@@ -37,7 +37,12 @@ web.get("/create", (req, res) => {
 });
 
 web.post("/items", (req, res) => {
-    
+    const { title, price, description, category, image } = req.body
+    if (!title || !price || !description || !category || !image) {
+        res.sendStatus(400);
+    }
+    item.add(title, price, description, category, image);
+    res.sendStatus(200);
 });
 
 web.delete("", (req, res) => {
