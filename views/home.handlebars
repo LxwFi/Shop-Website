@@ -1,0 +1,202 @@
+<head>
+<link rel="stylesheet" href="\stylesheets\styling.css"/>
+
+<Body>   
+    <header>  
+        <nav> 
+            <ul>
+                <li>  
+                    <img src="https://th.bing.com/th/id/R.fdd7a1d520d752a8e90658e615bd64b9?rik=GhhkQmM3HbOVsw&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_158445.png&ehk=FoEG8SH6nP%2b%2bVMArDv4EtYP0O5RCX2w%2fRZQGuvXY69I%3d&risl=&pid=ImgRaw&r=0">
+                    <a href="#"> Home </a>
+                </li> 
+                <div id="NavCentre">
+                    <li>  
+                        <a href="#"> Electronics </a>  
+                    </li>  
+                    <li>  
+                        <a href="#"> Jewelry </a>  
+                    </li>  
+                    <li> 
+                        <a href="#"> Men's clothing </a>  
+                    </li>  
+                    <li>  
+                        <a href="#"> Women's clothing </a>  
+                    </li>
+                </div>
+                <li>
+                    <div id="basket">
+                        <a href="/basket">
+                            Basket
+                            <img src="https://cdn.onlinewebfonts.com/svg/img_460503.png">
+                        </a>
+                    </div>
+                </li>
+            </ul>  
+        </nav>  
+    </header>  
+    <h1>
+    Shop website
+    </h1>
+    <br> 
+
+
+    
+        /*
+        <div class="row">
+            <div class="column">
+            <div class="card"><img src="https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_.jpg"><div class="card-body">Item name</div></div>
+            </div>
+            <div class="column">
+            <div class="card"><img src="https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg"><div class="card-body">Item name</div></div>
+            </div>
+            <div class="column">
+            <div class="card"><img src="https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg"><div class="card-body">Item name</div></div>
+            </div>
+            <div class="column">
+                <div class="card"><img src="https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"><div class="card-body">Item name</div></div>
+            </div>
+            <div class="column">
+                <div class="card"><img src="https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg"><div class="card-body">Item name</div></div>
+            </div>
+        </div>
+        */
+        
+      <script>
+    
+          /* Replace rows and cards with this when handlebars is setup
+
+            <div class="row">
+            {{#each companies}}
+
+                <div class="column">
+
+                    <a href="/{{this.id}}">
+                        <div class="card"><img src="{{this.productImg}}"><div class="card-body>{{this.productName}}</div>
+                    </a>
+
+                </div>  
+
+            {{/each}}
+          */
+
+     </script>
+
+
+</Body>   
+
+
+
+
+
+<style>
+    body   
+{  
+height: 125vh;  
+margin-top: 80px;  
+padding: 30px;  
+background-size: cover;  
+font-family: sans-serif;  
+}  
+header {  
+background-color: orange;  
+position: fixed;  
+left: 0;  
+right: 0;  
+top: 0;  
+height: 40px;  
+display: flex;  
+align-items: center;  
+box-shadow: 0 0 25px 0 black;  
+}  
+header * {  
+display: inline;  
+}  
+header li {  
+margin: 20px;  
+}  
+header li a {  
+color: blue;  
+text-decoration: none;  
+}  
+
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Float four columns side by side */
+  .column {
+    float: left;
+    width: 25%;
+    padding: 0 10px;
+  }
+  
+  /* Remove extra left and right margins, due to padding in columns */
+  .row {
+    margin: 0 -5px;
+  
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Style the counter cards */
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    padding: 16px;
+    text-align: center;
+    background-color: #f1f1f1;
+  }
+  
+  /* Responsive columns - one column layout (vertical) on small screens */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+
+  .card-columns .card-body {
+    height: 100px;
+    font-family: 'Nunito', sans-serif;
+    background: #fbfafd;
+}
+
+
+/*Mine */
+
+img{
+    height: 500px;
+    width: 400px;
+}
+
+#basket{
+  position: absolute;
+  right: 5%;
+  color: green;
+}
+
+li img{
+  width: 25px;
+  height: 25px;
+  text-align: center;
+}
+
+
+h1{
+  text-align: center;
+}
+
+#NavCentre{
+  position: absolute;
+  left: 40%;
+}
+</style>

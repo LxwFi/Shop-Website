@@ -28,12 +28,15 @@ web.use(express.urlencoded({ extended: true }));
 web.use(express.json());
 web.use(express.static('public'));
 
+web.get("/home", (req, res) => {
+    res.render("home");
+})
+
 web.get("/", (req, res) => {
-    res.sendStatus(200);
+    res.render('home');
 });
 
 web.get("/create", (req, res) => {
-
 
 });
 
