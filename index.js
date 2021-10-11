@@ -7,6 +7,7 @@ const Handlebars = require("handlebars");
 const expressHandlebars = require("express-handlebars");
 let rawdata = fs.readFileSync(path.resolve(__dirname, 'seed.json'));
 let data = JSON.parse(rawdata);
+const sqlite3 = require("sqlite3");
 const Items = require("./tables/items");
 const db = new sqlite3.Database("data.db");
 const item = new Items(db)
@@ -30,17 +31,13 @@ web.get("/", (req, res) => {
     res.sendStatus(200);
 });
 
-web.get("/create", (req, res) =>{
-   
+web.get("/create", (req, res) => {
+
 
 });
 
-web.post("", (req, res) => {
-    if (q) {
-        res.sendStatus(200);
-    } else {
-        res.sendStatus(400);
-    }
+web.post("/items", (req, res) => {
+    
 });
 
 web.delete("", (req, res) => {
@@ -55,7 +52,7 @@ web.delete("", (req, res) => {
 
 
 
-console.log(data.title);
+console.log(data[1]);
 
 web.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
