@@ -10,9 +10,11 @@ let data = JSON.parse(rawdata);
 const sqlite3 = require("sqlite3");
 const Items = require("./tables/items");
 const Categories = require("./tables/categories");
+const Basket = require("./tables/basket");
 const db = new sqlite3.Database("data.db");
 const item = new Items(db);
 const cat = new Categories(db);
+const cart = new Basket(db);
 web.use(express.static(path.join(__dirname, '/views')));
 
 const {
@@ -31,7 +33,7 @@ web.use(express.json());
 web.get("/", async (req, res) => {
     const items = await item.all();
     console.log(items);
-    res.render("home", {items});
+    res.render("home", { items });
 })
 
 
