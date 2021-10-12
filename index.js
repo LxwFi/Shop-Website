@@ -32,7 +32,7 @@ web.use(express.json());
 //main page + console log to show if someone is visiting
 web.get("/", async (req, res) => {
     const items = await item.all();
-    console.log(items);
+    console.log("Someone is visiting the website...");
     res.render("home", { items });
 })
 
