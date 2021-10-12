@@ -27,7 +27,7 @@
                 <li>
                     <div id="basket">
                         <a href="/cart">
-                            Basket
+                            Cart
                             <img src="https://cdn.onlinewebfonts.com/svg/img_460503.png">
                         </a>
                     </div>
@@ -41,21 +41,16 @@
       <img src="{{this.imageUrl}}">
     </div>
     <div class="text">
-      £{{this.price}}
-      <br>
-      <button onClick="fetch('/cart/{{this.id}}', {method: 'POST'}), alert('Added to Basket')">Add to Basket</button>
+        {{this.title}}<br>
+      £{{this.price}}<br>
+      <button onClick="fetch('/cart/{{this.id}}', {method: 'POST'}), alert('Added to Cart')">Add to Cart</button>
+        <br>{{this.desc}}
     </div>
-    
 </div>
-{{this.desc}}
 {{/each}}
-
-
-
 
 <script>
     const button = document.querySelector("button")
 </script>
-
 
 </Body>
