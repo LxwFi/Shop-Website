@@ -50,9 +50,19 @@ web.post("/items", (req, res) => {
     res.sendStatus(200);
 });
 
+web.patch("/desc/:id", (req, res) => {
+    if (req.params.id) {
+        item.descChange(req.params.id);
+        console.log("Deleting from cart with id " + req.params.id);
+        res.sendStatus(200);
+        return;
+    }
+    res.sendStatus(400);
+});
+
 
 web.delete("/delete/:id", (req, res) => {
-    if (req.params.id){
+    if (req.params.id) {
         cart.remove(req.params.id);
         console.log("Deleting from cart with id " + req.params.id);
         res.sendStatus(200);
@@ -60,6 +70,27 @@ web.delete("/delete/:id", (req, res) => {
     }
     res.sendStatus(400);
 
+});
+
+web.delete("/item/:id", (req, res) => {
+    if (req.params.id) {
+        item.remove(req.params.id);
+        console.log("Deleting item with id " + req.params.id);
+        res.sendStatus(200);
+        return;
+    }
+    res.sendStatus(400);
+
+});
+
+web.delete("/category/:id", (req, res) => {
+    if (req.params.id) {
+        category.remove(req.params.id);
+        console.log("Deleting category with id " + req.params.id);
+        res.sendStatus(200);
+        return;
+    }
+    res.sendStatus(400);
 });
 
 async function runThis() {
@@ -70,7 +101,6 @@ async function runThis() {
 }
 
 
-runThis();
 
 
 web.listen(port, async () => {
