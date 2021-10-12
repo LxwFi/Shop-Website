@@ -39,6 +39,8 @@ class Categories {
             this.database.serialize(() => {
                 this.database.run(`
                 DELETE FROM Categories WHERE category = (?)`, [category])
+                this.database.run(`
+                DELETE FROM Items WHERE category = (SELECT id FROM Categories WHERE category = (?))`, [category])
             });
         }
     }
