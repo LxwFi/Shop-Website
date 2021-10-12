@@ -108,3 +108,24 @@ h1{
   position: absolute;
   left: 40%;
 }
+
+/*Product page*/
+#productPageImage{
+  position:absolute;
+  top: 10%;
+  left: 25%;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.image {
+  flex-basis: 40%
+}
+.text {
+  font-size: 20px;
+  padding-left: 20px;
+}
