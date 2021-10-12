@@ -36,17 +36,17 @@
         </nav>  
     </header> 
 {{#each items}}
-<div class="container">
-    <div class="image">
-      <img src="{{this.imageUrl}}">
+    <div id="productImage">
+        <div class=card><img src="{{this.imageUrl}}"></div>
     </div>
+
     <div class="text">
-        {{this.title}}<br>
-      £{{this.price}}<br>
+        <center>
+        {{this.title}}<br><br>
+      £{{this.price}}<br><br>
       <button onClick="fetch('/cart/{{this.id}}', {method: 'POST'}), alert('Added to Cart')">Add to Cart</button>
-        <br>{{this.desc}}
+        <br><br><br>{{this.desc}}</center>
     </div>
-</div>
 {{/each}}
 
 <script>
