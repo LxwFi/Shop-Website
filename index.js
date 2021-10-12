@@ -32,9 +32,21 @@ web.use(express.json());
 //main page + console log to show if someone is visiting
 web.get("/", async (req, res) => {
     const items = await item.all();
-    console.log("Someone is visiting");
+    console.log(items);
     res.render("home", { items });
 })
+
+
+web.get("/:id", async (req, res) =>{
+    const items = await item.all(req.params.id);
+    res.render("home", {items})
+})
+
+web.get("/product/:id", async (req, res) =>{
+    const items = item.get(req.params.id);
+    res.render("product", {items});
+})
+
 
 
 web.get("/create", (req, res) => {

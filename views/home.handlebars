@@ -1,26 +1,30 @@
 <head>
 <link rel="stylesheet" href="\stylesheets\styling.css"/>
 
+
+
+</head>
+
 <Body>   
     <header>  
         <nav> 
             <ul>
                 <li>  
                     <img src="https://th.bing.com/th/id/R.fdd7a1d520d752a8e90658e615bd64b9?rik=GhhkQmM3HbOVsw&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_158445.png&ehk=FoEG8SH6nP%2b%2bVMArDv4EtYP0O5RCX2w%2fRZQGuvXY69I%3d&risl=&pid=ImgRaw&r=0">
-                    <a href="#"> Home </a>
+                    <a href="/"> Home </a>
                 </li> 
                 <div id="NavCentre">
                     <li>  
-                        <a href="#"> Electronics </a>  
+                        <a href="/electronics"> Electronics </a>  
                     </li>  
                     <li>  
-                        <a href="#"> Jewelry </a>  
+                        <a href="/jewelery"> Jewelry </a>  
                     </li>  
                     <li> 
-                        <a href="#"> Men's clothing </a>  
+                        <a href="/men's clothing"> Men's clothing </a>  
                     </li>  
                     <li>  
-                        <a href="#"> Women's clothing </a>  
+                        <a href="/women's clothing"> Women's clothing </a>  
                     </li>
                 </div>
                 <li>
@@ -34,18 +38,31 @@
             </ul>  
         </nav>  
     </header>  
-    <h1>
-    Shop website
+    <h1 id="header">
+        Home page
     </h1>
+    
     <br> 
 
-        <div class="row">
-        {{#each items}}
-            <div class="column">
-                <a href="/{{this.id}}">
-                    <div class="card"><img src="{{this.imageUrl}}"><div class="card-body">{{this.id}}</div></div>
-                </a>
-            </div>  
-        {{/each}}
-        </div>
+    <div class="row">
+    {{#each items}}
+        <div class="column">
+            <a href="/product/{{this.id}}">
+                <div class="card"><img src="{{this.imageUrl}}"><div class="card-body">{{this.title}}</div></div>
+            </a>
+        </div>  
+    {{/each}}
+    </div>
+
+<script>
+    let count = 0;
+    {{#each items}}
+        count++;
+    {{/each}}
+    if (count < 10){
+        const header = document.getElementById("header");
+        header.innerText="Other";
+    }
+</script>
 </Body>
+
