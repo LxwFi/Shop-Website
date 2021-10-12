@@ -6,12 +6,12 @@ const path = require("path");
 const Handlebars = require("handlebars");
 const expressHandlebars = require("express-handlebars");
 let rawdata = fs.readFileSync(path.resolve(__dirname, 'seed.json'));
-let data = JSON.parse(rawdata);
+let test = JSON.parse(rawdata);
 const sqlite3 = require("sqlite3");
 const Items = require("./tables/items");
 const Categories = require("./tables/categories");
 const Basket = require("./tables/basket");
-const db = new sqlite3.Database("data.db");
+const db = new sqlite3.Database("test.db");
 const item = new Items(db);
 const cat = new Categories(db);
 const cart = new Basket(db);
@@ -63,11 +63,14 @@ web.delete("/delete/:id", (req, res) => {
 });
 
 async function runThis() {
-    for (i of data) {
+    for (i of test) {
         const { title, price, description, category, image } = i
         await item.add(title, price, description, category, image);
     }
 }
+
+
+runThis();
 
 
 web.listen(port, async () => {
