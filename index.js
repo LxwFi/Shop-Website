@@ -53,7 +53,6 @@ web.get("/create", (req, res) => {
 
 });
 
-
 //add new items, creates a new category if it doesnt exist
 web.post("/items", (req, res) => {
     const { title, price, description, category, image } = req.body
