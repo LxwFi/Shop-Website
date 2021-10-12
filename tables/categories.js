@@ -44,6 +44,9 @@ class Categories {
             });
         }
     }
+    async all() {
+        return await this.dbAll("SELECT DISTINCT category FROM Categories");
+    }
 }
 
 module.exports = Categories;
