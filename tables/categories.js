@@ -34,13 +34,13 @@ class Categories {
     }
     async remove(category) {
         // Takes in the param of the name of category to delete
-        const [exist] = await this.dbAll("SELECT id FROM Categories WHERE category = (?)", [category])
+        const [exist] = await this.dbAll("SELECT * FROM Categories WHERE id = (?)", [category])
         if (typeof exist !== 'undefined') {
             this.database.serialize(() => {
                 this.database.run(`
-                DELETE FROM Categories WHERE category = (?)`, [category])
+                DELETE FROM Categories WHERE id = (?)`, [category])
                 this.database.run(`
-                DELETE FROM Items WHERE category = (SELECT id FROM Categories WHERE category = (?))`, [category])
+                DELETE FROM Items WHERE category = (?)`, [category])
             });
         }
     }

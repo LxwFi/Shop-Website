@@ -43,6 +43,9 @@ class Basket {
             })
         }
     }
+    async getItems() {
+        return await this.dbAll("SELECT * FROM Basket")
+    }
 }
 
 module.exports = Basket;
