@@ -47,7 +47,8 @@ class Basket {
         const ret = [];
         const its = await this.dbAll("SELECT * FROM Basket")
         for (let i of its) {
-            ret.push(await this.dbAll("SELECT title, price, imageUrl FROM Items WHERE id = (?)", i.item))
+            const [is] = await this.dbAll("SELECT title, price, imageUrl FROM Items WHERE id = (?)", i.item)
+            ret.push(is)
         }
         return ret;
         
