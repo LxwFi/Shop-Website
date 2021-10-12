@@ -72,7 +72,9 @@ class Items {
             return await this.dbAll("SELECT * FROM Items")
         }
             return await this.dbAll("SELECT * FROM Items WHERE category = (SELECT id FROM Categories WHERE category = (?))", [category])
-
+    }
+    async get(id) {
+        return await this.dbAll("SELECT * FROM Items WHERE id = (?)", [id])
     }
 
     
