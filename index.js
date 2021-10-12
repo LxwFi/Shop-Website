@@ -11,7 +11,7 @@ const sqlite3 = require("sqlite3");
 const Items = require("./tables/items");
 const Categories = require("./tables/categories");
 const Basket = require("./tables/basket");
-const db = new sqlite3.Database("test.db");
+const db = new sqlite3.Database("data.db");
 const item = new Items(db);
 const cat = new Categories(db);
 const cart = new Basket(db);
@@ -43,7 +43,7 @@ web.get("/:id", async (req, res) =>{
 })
 
 web.get("/product/:id", async (req, res) =>{
-    const items = item.get(req.params.id);
+    const items = await item.get(req.params.id);
     res.render("product", {items});
 })
 
