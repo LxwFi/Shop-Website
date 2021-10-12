@@ -44,8 +44,16 @@ class Basket {
         }
     }
     async getItems() {
-        return await this.dbAll("SELECT * FROM Basket")
+        const ret = [];
+        const its = await this.dbAll("SELECT * FROM Basket")
+        console.log(its)
+        for (let i of its) {
+            ret.push(await this.dbAll("SELECT title, price, imageUrl FROM Items WHERE id = (?)", i.item))
+        }
+        return ret;
+        
     }
 }
+
 
 module.exports = Basket;
