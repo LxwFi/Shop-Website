@@ -36,32 +36,35 @@ web.get("/", async (req, res) => {
     res.render("home", { items });
 })
 
+
+//cart of items
 web.get("/cart", async (req, res) => {
-    res.send(await cart.getItems());
+    const items = await cart.getItems()
+    res.render("cart", {items});
 })
 
+
+
+
+//categories
 web.get("/:id", async (req, res) =>{
     const items = await item.all(req.params.id);
     res.render("home", {items})
 })
 
+//displays specific product
 web.get("/product/:id", async (req, res) =>{
     const items = await item.get(req.params.id);
     res.render("product", {items});
 })
 
-
-
-web.get("/create", (req, res) => {
-
-});
-
 //add new items, creates a new category if it doesnt exist
-web.post("/items", (req, res) => {
+web.post("/items", async (req, res) => {
     const { title, price, description, category, image } = req.body
     if (!title || !price || !description || !category || !image) {
         res.sendStatus(400);
     }
+    
     item.add(title, price, description, category, image);
     res.sendStatus(200);
 });
@@ -133,9 +136,17 @@ async function runThis() {
     }
 }
 
-
+//loop to clear out db after testing, replace "number" with a number
+// let i = "number";
+// while (i < 100){
+//     item.remove(i);
+//     console.log("removing item with ID " + i);
+//     i++;
+// }
 
 
 web.listen(port, async () => {
     console.log(`Server listening at http://localhost:${port}`);
 });
+
+module.exports = web;
