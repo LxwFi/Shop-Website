@@ -60,18 +60,12 @@ text-decoration: none;
   .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
     padding: 16px;
+
     text-align: center;
-    background-color: #f1f1f1;
+    background-color:aliceblue;
+    height: 570px;
   }
   
-  /* Responsive columns - one column layout (vertical) on small screens */
-  @media screen and (max-width: 600px) {
-    .column {
-      width: 100%;
-      display: block;
-      margin-bottom: 20px;
-    }
-  }
 
   .card-columns .card-body {
     height: 100px;
@@ -83,8 +77,8 @@ text-decoration: none;
 /*Mine */
 
 img{
-    height: 400px;
-    width: 350px;
+    height: 500px;
+    width: 400px;
 }
 
 #basket{
@@ -110,22 +104,16 @@ h1{
 }
 
 /*Product page*/
-#productPageImage{
-  position:absolute;
+#productImage{
+  position: absolute;
   top: 10%;
-  left: 25%;
+  left: 5%;
+  flex-basis: 40%;
 }
 
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center
-}
-
-.image {
-  flex-basis: 40%
-}
 .text {
+  position: absolute;
+  top: 25%;
+  left: 28%;
   font-size: 20px;
-  padding-left: 20px;
 }
