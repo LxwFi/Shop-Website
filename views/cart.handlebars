@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./stylesheets/styling.css">
+
     <title>Your Basket</title>
 </head>
 <body>
     <h1>Your Basket</h1>
 
-    <div class="basket-column">
-
+    <div class="cart-column">
+        {{#each cart}}
+            <div id="cart-product">
+                <img src="{{this.imageUrl}}"><div class="card-body">{{this.title}}</div> 
+            </div>
+        {{/each}}
     </div>
 </body>
 </html>
