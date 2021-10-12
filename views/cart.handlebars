@@ -41,10 +41,16 @@
         {{#each items}}
             <div id="cart-product">
                 <img class="card-body" src="{{this.imageUrl}}">
-                <div class="card-body">£{{this.title}}</div> 
-                <div class="card-body">{{this.price}}</div>
+                <div class="card-body">{{this.title}}</div> 
+                <div class="card-body">£{{this.price}}</div>
             </div>
         {{/each}}
     </div>
+    <button onClick="fetch('/checkout', {method: 'DELETE'})">Buy Now</button>
+
+
+    <script>
+        const button = document.querySelector("button")
+    </script>
 </body>
 </html>
