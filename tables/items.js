@@ -30,7 +30,8 @@ class Items {
         // Takes in the item params and adds it to the databse
         const Category = new Categories(this.database);
         await Category.add(cat);  // Creates a category if it doesn't exist
-        const [exist] = await this.dbAll("SELECT id FROM Items WHERE title = (?) AND category = (SELECT id FROM Category WHERE category = (?))",
+        try {
+            const [exist] = await this.dbAll("SELECT id FROM Items WHERE title = (?) AND category = (SELECT id FROM Category WHERE category = (?))",
             [title, cat])
         if (typeof exist === 'undefined') {
             this.database.serialize(() => {
@@ -41,6 +42,16 @@ class Items {
                     (SELECT id FROM Categories WHERE category = (?)), (?))`,
                     [title, price, desc, cat, imageUrl])
             }); // Inserts new item  into the databse
+        }
+        } catch {
+            this.database.serialize(() => {
+                this.database.run(`
+                    INSERT INTO Items
+                    (title, price, desc, category, imageUrl)
+                    VALUES ((?),(?),(?),
+                    (SELECT id FROM Categories WHERE category = (?)), (?))`,
+                    [title, price, desc, cat, imageUrl])
+            });
         }
     }
     async remove(id) {
