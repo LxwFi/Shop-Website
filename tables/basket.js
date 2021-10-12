@@ -46,7 +46,6 @@ class Basket {
     async getItems() {
         const ret = [];
         const its = await this.dbAll("SELECT * FROM Basket")
-        console.log(its)
         for (let i of its) {
             ret.push(await this.dbAll("SELECT title, price, imageUrl FROM Items WHERE id = (?)", i.item))
         }
