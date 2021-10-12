@@ -36,6 +36,9 @@ web.get("/", async (req, res) => {
     res.render("home", { items });
 })
 
+web.get("/cart", async (req, res) => {
+    res.send(await cart.getItems());
+})
 
 web.get("/:id", async (req, res) =>{
     const items = await item.all(req.params.id);
@@ -52,7 +55,6 @@ web.get("/product/:id", async (req, res) =>{
 web.get("/create", (req, res) => {
 
 });
-
 
 //add new items, creates a new category if it doesnt exist
 web.post("/items", (req, res) => {
