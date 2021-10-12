@@ -36,6 +36,9 @@ web.get("/", async (req, res) => {
     res.render("home", { items });
 })
 
+web.get("/cart", async (req, res) => {
+    res.send(await cart.getItems());
+})
 
 web.get("/create", (req, res) => {
 
