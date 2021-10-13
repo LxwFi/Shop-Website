@@ -47,9 +47,15 @@ web.get("/cart", async (req, res) => {
 
 web.get("/clear", async (req, res) => {
     const a = await cart.total()
-    await cart.clear();
-    console.log("Purchased with total " + a);
-    res.render("clear");
+    if (a != 0){
+        console.log("Purchased with total " + a);
+        await cart.clear();
+        res.render("clear");
+    } else {
+        console.log("Cart is empty!");
+        return;
+    }
+
 });
 
 // //"purchase" function for the website
