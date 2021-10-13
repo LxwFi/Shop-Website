@@ -40,9 +40,11 @@ web.get("/", async (req, res) => {
 //cart of items
 web.get("/cart", async (req, res) => {
     const items = await cart.getItems()
-    res.render("cart", { items });
+    const total = await cart.total();
+    res.render("cart", { items, total });
 });
 
+//"purchase" function for the website
 web.delete("/clear", async (req, res) => {
     const a = await cart.total()
     await cart.clear();
@@ -50,10 +52,6 @@ web.delete("/clear", async (req, res) => {
     res.sendStatus(200);
 });
 
-web.get("/total", async (req, res) => {
-    const total = await cart.total();
-    res.sendStatus(200);
-});
 
 
 //categories
