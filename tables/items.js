@@ -79,12 +79,15 @@ class Items {
         }
     }
     async all(category = 0) {
+        // Returns a list of all items
+        // If category param is given, it'll return the items in the category id
         if (category == 0) {
             return await this.dbAll("SELECT * FROM Items")
         }
             return await this.dbAll("SELECT * FROM Items WHERE category = (SELECT id FROM Categories WHERE category = (?))", [category])
     }
     async get(id) {
+        // Returns an object of an item given the id param
         return await this.dbAll("SELECT * FROM Items WHERE id = (?)", [id])
     }
 
