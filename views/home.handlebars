@@ -7,14 +7,16 @@
         Template
     </h1>
 
-        {{#each items}}
-            <script>
-                document.getElementById("header").innerText = {{this.category}};
-            </script>
-        {{/each}}
+    <!-- Change h1 "Template" to category ID --->
+    {{#each items}}
+        <script>
+            document.getElementById("header").innerText = {{this.category}};
+        </script>
+    {{/each}}
     
     <br> 
 
+    <!-- Product cards -->
     <div class="row">
     {{#each items}}
         <div class="column">
