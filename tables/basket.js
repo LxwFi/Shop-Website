@@ -53,7 +53,7 @@ class Basket {
         return ret;
     }
     async clear() {
-        const [exist] = await this.dbAll("SELECT * FROM Basket WHERE item = (?)", [item])
+        const [exist] = await this.dbAll("SELECT * FROM Basket")
         if (typeof exist !== 'undefined') {
             this.database.serialize(() => {
                 this.database.run(`
