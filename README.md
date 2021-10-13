@@ -1,4 +1,6 @@
 ## Dependencies required
+
+Running "npm i" downloads all the dependencies but below are the ones listed incase that does not work
  
 * express
 * handlebars 
