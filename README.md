@@ -38,7 +38,7 @@ Running the website on your local machine is super simple, simply download the p
 
 ## Database Design
 
-![alt text](https://ibb.co/syFr4td)
+![alt text](https://i.ibb.co/jgLFYHP/diagram.png)
 
 ## Roles and responsibilities 
 
