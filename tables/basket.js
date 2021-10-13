@@ -44,6 +44,7 @@ class Basket {
         }
     }
     async getItems() {
+        // Returns all items in a list of objects in the basket
         const ret = [];
         const its = await this.dbAll("SELECT * FROM Basket")
         for (let i of its) {
@@ -53,6 +54,7 @@ class Basket {
         return ret;
     }
     async clear() {
+        // Clears all items in the basket
         const [exist] = await this.dbAll("SELECT * FROM Basket")
         if (typeof exist !== 'undefined') {
             this.database.serialize(() => {
@@ -62,6 +64,7 @@ class Basket {
         }
     }
     async total() {
+        // Returns the total value of all items in the basket
         let ret = 0;
         const its = await this.dbAll("SELECT * FROM Basket")
         for (let i of its) {

@@ -45,9 +45,11 @@ class Categories {
         }
     }
     async all() {
+        // Returns an object of all the categories
         return await this.dbAll("SELECT DISTINCT category FROM Categories");
     }
     async name(id) {
+        // Returns the name of a category via the param id
         const [n] = await this.dbAll("SELECT category FROM Categories WHERE id = (?)", [id])
         return n.category
     }

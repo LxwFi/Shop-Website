@@ -53,7 +53,11 @@ web.delete("/clear", async (req, res) => {
     res.sendStatus(200);
 });
 
-
+web.get("/clear", async (req, res) => {
+    const a = await cart.total()
+    await cart.clear();
+    res.render("clear", {})
+});
 
 //categories
 web.get("/:id", async (req, res) => {
@@ -113,6 +117,13 @@ web.delete("/cart/:id", (req, res) => {
     }
     res.sendStatus(400);
 });
+
+//remove all from cart
+web.delete("/cart", (req, res) => {
+    cart.clear();
+    res.sendStatus(200);
+    return;
+})
 
 
 //delete item 
