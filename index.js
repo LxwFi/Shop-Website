@@ -34,29 +34,39 @@ web.get("/", async (req, res) => {
     const items = await item.all();
     console.log("Someone is visiting the website...");
     res.render("home", { items });
-})
+});
 
 
 //cart of items
 web.get("/cart", async (req, res) => {
     const items = await cart.getItems()
-    res.render("cart", {items});
-})
+    res.render("cart", { items });
+});
 
+web.delete("/clear", async (req, res) => {
+    const a = await cart.total()
+    await cart.clear();
+    console.log("Purchased with total " + a);
+    res.sendStatus(200);
+});
 
+web.get("/total", async (req, res) => {
+    await cart.total();
+    res.sendStatus(200);
+});
 
 
 //categories
-web.get("/:id", async (req, res) =>{
+web.get("/:id", async (req, res) => {
     const items = await item.all(req.params.id);
-    res.render("home", {items})
-})
+    res.render("home", { items })
+});
 
 //displays specific product
-web.get("/product/:id", async (req, res) =>{
+web.get("/product/:id", async (req, res) => {
     const items = await item.get(req.params.id);
-    res.render("product", {items});
-})
+    res.render("product", { items });
+});
 
 //add new items, creates a new category if it doesnt exist
 web.post("/items", async (req, res) => {
@@ -64,7 +74,7 @@ web.post("/items", async (req, res) => {
     if (!title || !price || !description || !category || !image) {
         res.sendStatus(400);
     }
-    
+
     item.add(title, price, description, category, image);
     res.sendStatus(200);
 });
@@ -73,7 +83,7 @@ web.post("/items", async (req, res) => {
 //change the description of an item
 web.patch("/desc/:id", (req, res) => {
     if (req.params.id) {
-        const {desc} = req.body
+        const { desc } = req.body
         item.descChange(req.params.id, desc);
         console.log("Changing desc for item with ID " + req.params.id);
         res.sendStatus(200);
@@ -84,7 +94,7 @@ web.patch("/desc/:id", (req, res) => {
 
 
 //add to cart
-web.post("/cart/:id", (req, res) =>{
+web.post("/cart/:id", (req, res) => {
     if (req.params.id) {
         cart.add(req.params.id);
         console.log("Adding item to cart with ID " + req.params.id);
