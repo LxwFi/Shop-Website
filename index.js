@@ -45,19 +45,20 @@ web.get("/cart", async (req, res) => {
     res.render("cart", { items, total });
 });
 
-//"purchase" function for the website
-web.delete("/clear", async (req, res) => {
-    const a = await cart.total()
-    await cart.clear();
-    console.log("Purchased with total " + a);
-    res.sendStatus(200);
-});
-
 web.get("/clear", async (req, res) => {
     const a = await cart.total()
     await cart.clear();
-    res.render("clear", {})
+    console.log("Purchased with total " + a);
+    res.render("clear");
 });
+
+// //"purchase" function for the website
+// web.delete("/clear", async (req, res) => {
+//     const a = await cart.total()
+//     await cart.clear();
+//     console.log("Purchased with total " + a);
+//     res.sendStatus(200);
+// });
 
 //categories
 web.get("/:id", async (req, res) => {

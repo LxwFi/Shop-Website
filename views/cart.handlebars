@@ -48,7 +48,10 @@
         {{/each}}
     </div>
     <p>Total: £{{this.total}}</p>    
-    <button onClick="fetch('/clear', {method: 'DELETE'})">Buy Now</button>
+    <form action="/clear">
+        <button onClick="fetch('/clear', {method: 'GET'})">Buy Now</button>
+    </form>
+    
 
     <script>
         const button = document.querySelector("button")
