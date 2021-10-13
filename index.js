@@ -113,6 +113,13 @@ web.delete("/cart/:id", (req, res) => {
     res.sendStatus(400);
 });
 
+//remove all from cart
+web.delete("/cart", (req, res) => {
+    cart.clear();
+    res.sendStatus(200);
+    return;
+})
+
 
 //delete item 
 web.delete("/item/:id", (req, res) => {
