@@ -51,7 +51,7 @@ web.delete("/clear", async (req, res) => {
 });
 
 web.get("/total", async (req, res) => {
-    await cart.total();
+    const total = await cart.total();
     res.sendStatus(200);
 });
 
