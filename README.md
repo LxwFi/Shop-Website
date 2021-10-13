@@ -28,13 +28,7 @@ Running the website on your local machine is super simple, simply download the p
 * In "Index.js" on line 14 change the name of the file you are using for your database
 * Set your own port for localhost if you want to change it on line 4
 * Below is the structure for inputting your own items using POST requests
-    {
-       "title":"",
-       "price": num,
-       "description":"",
-       "category":"",
-       "image":""
-    }
+*   {"title": "",  "price": num,   "description": "",   "category": "",   "image": ""  }
 * If you want to run tests put "npm run test" in the terminal
 
 
