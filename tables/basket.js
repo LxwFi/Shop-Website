@@ -53,13 +53,22 @@ class Basket {
         return ret;
     }
     async clear() {
-        const [exist] = await this.dbAll("SELECT * FROM Basket WHERE item = (?)", [item])
+        const [exist] = await this.dbAll("SELECT * FROM Basket")
         if (typeof exist !== 'undefined') {
             this.database.serialize(() => {
                 this.database.run(`
-                DELETE FROM Basket `)
+                DELETE FROM Basket`)
             });
         }
+    }
+    async total() {
+        let ret = 0;
+        const its = await this.dbAll("SELECT * FROM Basket")
+        for (let i of its) {
+            const [p] = await this.dbAll("SELECT price FROM Items WHERE id = (?)", i.item)
+            ret += p.price
+        }
+        return ret.toFixed(2);
     }
 }
 
