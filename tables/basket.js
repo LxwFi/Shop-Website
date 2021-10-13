@@ -51,7 +51,15 @@ class Basket {
             ret.push(is)
         }
         return ret;
-        
+    }
+    async clear() {
+        const [exist] = await this.dbAll("SELECT * FROM Basket WHERE item = (?)", [item])
+        if (typeof exist !== 'undefined') {
+            this.database.serialize(() => {
+                this.database.run(`
+                DELETE FROM Basket `)
+            });
+        }
     }
 }
 
