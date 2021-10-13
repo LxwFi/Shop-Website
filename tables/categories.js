@@ -47,6 +47,10 @@ class Categories {
     async all() {
         return await this.dbAll("SELECT DISTINCT category FROM Categories");
     }
+    async name(id) {
+        const [n] = await this.dbAll("SELECT category FROM Categories WHERE id = (?)", [id])
+        return n.category
+    }
 }
 
 module.exports = Categories;
