@@ -38,6 +38,10 @@ Running the website on your local machine is super simple, simply download the p
 
 (Frontend writes here)
 
+## Database Design
+
+![alt text](https://i.ibb.co/jgLFYHP/diagram.png)
+
 ## Roles and responsibilities 
 
 **Back end**
