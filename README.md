@@ -44,12 +44,12 @@ Running the website on your local machine is super simple, simply download the p
 
 ## Roles and responsibilities 
 
-* **Back end**
-Tymoteusz (LxwFi) - Express and bug testing
-William - Database
+**Back end**
+* Tymoteusz (LxwFi) - Express and bug testing
+* William - Database manager
 
-* **Front End**
-Peace & Jamie - Together did the entire HTML, Handlebars and CSS programming
+**Front End**
+* Peace & Jamie - Together did the entire HTML, Handlebars and CSS programming
 
 
 
