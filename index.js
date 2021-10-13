@@ -1,7 +1,7 @@
 const express = require('express');
 const web = express();
 const fs = require("fs");
-const port = 3000;
+const port = 3000; // change number here to whatever you want
 const path = require("path");
 const Handlebars = require("handlebars");
 const expressHandlebars = require("express-handlebars");
@@ -11,7 +11,7 @@ const sqlite3 = require("sqlite3");
 const Items = require("./tables/items");
 const Categories = require("./tables/categories");
 const Basket = require("./tables/basket");
-const db = new sqlite3.Database("data.db");
+const db = new sqlite3.Database("data.db"); // change name of "data".db to whatever database name you are using
 const item = new Items(db);
 const cat = new Categories(db);
 const cart = new Basket(db);
