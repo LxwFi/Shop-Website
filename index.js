@@ -19,6 +19,7 @@ web.use(express.static(path.join(__dirname, '/views')));
 const {
     allowInsecurePrototypeAccess,
 } = require("@handlebars/allow-prototype-access");
+const { clear } = require('console');
 const handlebars = expressHandlebars({
     handlebars: allowInsecurePrototypeAccess(Handlebars),
 });

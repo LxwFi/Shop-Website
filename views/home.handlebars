@@ -21,7 +21,10 @@
     {{#each items}}
         <div class="column">
             <a href="/product/{{this.id}}">
-                <div class="card"><img src="{{this.imageUrl}}"><div class="card-body">{{this.title}}</div></div>
+                <div class="card">
+                    <img src="{{this.imageUrl}}">
+                    <div class="card-body">{{this.title}}</div>
+                </div>
             </a>
         </div>
     {{/each}}
