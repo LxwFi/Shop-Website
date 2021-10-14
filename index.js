@@ -40,28 +40,9 @@ web.get("/", async (req, res) => {
     res.render("home", { items, categories });
 });
 
-web.get("/login", (req, res) => {
-    const reject = () => {
-        res.setHeader('www-authenticate', 'Basic')
-        res.sendStatus(401)
-    }
-    const authorization = req.headers.authorization
+// CART SUFF
 
-    if (!authorization) {
-        return reject()
-    }
-
-    const [username, password] = Buffer.from(authorization.replace('Basic ', ''), 'base64').toString().split(':')
-
-    if (!(password === process.env.password)) {   //set password manually here or in your own .env file
-        return reject()
-    }
-
-    res.send('Welcome ' + username + " to the web")
-});
-
-
-//cart of items
+//get the cart web page
 web.get("/cart", async (req, res) => {
     const items = await cart.getItems()
     const total = await cart.total();
