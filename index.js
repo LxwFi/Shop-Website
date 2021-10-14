@@ -12,6 +12,7 @@ const Items = require("./tables/items");
 const Categories = require("./tables/categories");
 const Basket = require("./tables/basket");
 const db = new sqlite3.Database("data.db"); // change name of "data".db to whatever database name you are using
+require('dotenv').config()
 const item = new Items(db);
 const cat = new Categories(db);
 const cart = new Basket(db);
@@ -38,12 +39,28 @@ web.get("/", async (req, res) => {
 });
 
 
+web.get("/login", (req, res) => {
+    password = process.env.password;
+    console.log(password);
+    // res.render("login")
+
+
+
+
+
+
+
+
+
+});
+
+
 //cart of items
 web.get("/cart", async (req, res) => {
     const items = await cart.getItems()
     const total = await cart.total();
     const message = "Cart is empty";
-    res.render("cart", { items, total, message});
+    res.render("cart", { items, total, message });
 });
 
 web.get("/cartValues", async (req, res) => {
@@ -53,39 +70,18 @@ web.get("/cartValues", async (req, res) => {
 
 //"purchase" function for the website
 web.delete("/clear", async (req, res) => {
-    const a = await cart.total()
+    const a = await cart.total();
     await cart.clear();
-    console.log("Purchased with total " + a);
-    res.sendStatus(200);
+    console.log("Purchased items worth " + a);
+    res.render("clear");
 });
-
-web.get("/clear", async (req, res) => {
-    const a = await cart.total()
-    if (a != 0){
-        console.log("Purchased with total " + a);
-        await cart.clear();
-        res.render("clear");
-    } else {
-        console.log("Cart is empty!");
-        return;
-    }
-
-});
-
-// //"purchase" function for the website
-// web.delete("/clear", async (req, res) => {
-//     const a = await cart.total()
-//     await cart.clear();
-//     console.log("Purchased with total " + a);
-//     res.sendStatus(200);
-// });
 
 //categories
 web.get("/:id", async (req, res) => {
     const items = await item.all(req.params.id);
     const categoryLower = req.params.id;
     const category = categoryLower[0].toUpperCase() + categoryLower.substring(1);
-    res.render("home", { items, category});
+    res.render("home", { items, category });
 });
 
 //displays specific product
