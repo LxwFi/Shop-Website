@@ -16,18 +16,11 @@
                     <a href="/"> Home </a>
                 </li> 
                 <div id="NavCentre">
-                    <li>  
-                        <a href="/electronics"> Electronics </a>  
-                    </li>  
-                    <li>  
-                        <a href="/jewelery"> Jewelry </a>  
-                    </li>  
-                    <li> 
-                        <a href="/men's clothing"> Men's clothing </a>  
-                    </li>  
-                    <li>  
-                        <a href="/women's clothing"> Women's clothing </a>  
-                    </li>
+                        {{#each categories}}
+                            <li>  
+                                <a href="/{{this.category}}"> {{this.category}} </a>  
+                            </li>  
+                        {{/each}}
                 </div>
                 <li>
                     <div id="basket">
