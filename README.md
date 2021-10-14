@@ -7,6 +7,7 @@ Running "npm i" downloads all the dependencies but below are the ones listed inc
 * express-handlebars
 * sqlite3
 * @handlebars/allow-prototype-access
+* dotenv (you can skip this one)
 
 **Below dependencies are for if you want to run tests in "index.test.js"**
 
@@ -23,7 +24,7 @@ Running the website on your local machine is super simple, simply download the p
 * (Write about categories)
 * Persistent shopping cart when the website is closed
 * "Buy" feature that removes items from the database after being bought
-* Admin panel to add products and change descriptions
+* Admin panel with login to add products and change descriptions
 
 ## Key notes
 
@@ -32,6 +33,7 @@ Running the website on your local machine is super simple, simply download the p
 * Below is the structure for inputting your own items using POST requests
 *   {"title": "",  "price": num,   "description": "",   "category": "",   "image": ""  }
 * If you want to run tests put "npm run test" in the terminal
+* Make sure to change the password in the index file to whatever you want it to be
 
 
 ## Design decisions
@@ -45,8 +47,8 @@ Running the website on your local machine is super simple, simply download the p
 ## Roles and responsibilities 
 
 **Back end**
-* Tymoteusz (LxwFi) - Express and bug testing
-* William - Database manager
+* Tymoteusz (LxwFi) - Express + bug testing
+* William - Database manager + supertest
 
 **Front End**
 * Peace & Jamie - Together did the entire HTML, Handlebars and CSS programming
