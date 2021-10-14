@@ -3,6 +3,7 @@
     <title>Your Basket</title>
 </head>
 <body>
+    {{!-- Navigation Bar --}}
     <header>  
         <nav> 
             <ul>
@@ -46,9 +47,11 @@
             </div>
         {{/each}}
     </div>
-    <p>Total: {{this.total}}</p>    
-    <button onClick="fetch('/clear', {method: 'DELETE'})">Buy Now</button>
-
+    <p>Total: £{{this.total}}</p>    
+    <form action="/clear">
+        <button onClick="fetch('/clear', {method: 'GET'})">Buy Now</button>
+    </form>
+    
 
     <script>
         const button = document.querySelector("button")

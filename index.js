@@ -1,7 +1,7 @@
 const express = require('express');
 const web = express();
 const fs = require("fs");
-const port = 3000;
+const port = 3000; // change number here to whatever you want
 const path = require("path");
 const Handlebars = require("handlebars");
 const expressHandlebars = require("express-handlebars");
@@ -11,7 +11,7 @@ const sqlite3 = require("sqlite3");
 const Items = require("./tables/items");
 const Categories = require("./tables/categories");
 const Basket = require("./tables/basket");
-const db = new sqlite3.Database("data.db");
+const db = new sqlite3.Database("data.db"); // change name of "data".db to whatever database name you are using
 const item = new Items(db);
 const cat = new Categories(db);
 const cart = new Basket(db);
@@ -19,6 +19,7 @@ web.use(express.static(path.join(__dirname, '/views')));
 const {
     allowInsecurePrototypeAccess,
 } = require("@handlebars/allow-prototype-access");
+const { clear } = require('console');
 const handlebars = expressHandlebars({
     handlebars: allowInsecurePrototypeAccess(Handlebars),
 });
@@ -44,6 +45,7 @@ web.get("/cart", async (req, res) => {
     res.render("cart", { items, total });
 });
 
+<<<<<<< HEAD
 web.get("/cartValues", async (req, res) => {
     const items = await cart.getItems();
     res.send(items)
@@ -57,11 +59,28 @@ web.delete("/clear", async (req, res) => {
     res.sendStatus(200);
 });
 
+=======
+>>>>>>> 15fd9213381c1e1613baf4bff628f4e811363e0f
 web.get("/clear", async (req, res) => {
     const a = await cart.total()
-    await cart.clear();
-    res.render("clear", {})
+    if (a != 0){
+        console.log("Purchased with total " + a);
+        await cart.clear();
+        res.render("clear");
+    } else {
+        console.log("Cart is empty!");
+        return;
+    }
+
 });
+
+// //"purchase" function for the website
+// web.delete("/clear", async (req, res) => {
+//     const a = await cart.total()
+//     await cart.clear();
+//     console.log("Purchased with total " + a);
+//     res.sendStatus(200);
+// });
 
 //categories
 web.get("/:id", async (req, res) => {
