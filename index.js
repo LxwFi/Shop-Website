@@ -42,7 +42,8 @@ web.get("/", async (req, res) => {
 web.get("/cart", async (req, res) => {
     const items = await cart.getItems()
     const total = await cart.total();
-    res.render("cart", { items, total });
+    const message = "Cart is empty";
+    res.render("cart", { items, total, message});
 });
 
 web.get("/cartValues", async (req, res) => {

@@ -2,26 +2,31 @@
     <link rel="stylesheet" href="\stylesheets\styling.css">
     <title>Your Basket</title>
 </head>
+
 <body>
 
     <h1>Your Basket</h1>
     <div class="cart-column">
+        <div class="card-body">{{this.message}}</div>
         {{#each items}}
-            <div id="cart-product">
-                <img class="card-body" src="{{this.imageUrl}}">
-                <div class="card-body">{{this.title}}</div> 
-                <div class="card-body">£{{this.price}}</div>
-            </div>
+        <div id="cart-product">
+            <img class="card-body" src="{{this.imageUrl}}">
+            <div class="card-body">{{this.title}}</div>
+            <div class="card-body">£{{this.price}}</div>
+
+
+        </div>
         {{/each}}
     </div>
-    <p>Total: £{{this.total}}</p>    
+    <p>Total: £{{this.total}}</p>
     <form action="/clear">
         <button onClick="fetch('/clear', {method: 'GET'})">Buy Now</button>
     </form>
-    
+
 
     <script>
         const button = document.querySelector("button")
     </script>
 </body>
+
 </html>
