@@ -45,7 +45,6 @@ web.get("/cart", async (req, res) => {
     res.render("cart", { items, total });
 });
 
-<<<<<<< HEAD
 web.get("/cartValues", async (req, res) => {
     const items = await cart.getItems();
     res.send(items)
@@ -59,8 +58,6 @@ web.delete("/clear", async (req, res) => {
     res.sendStatus(200);
 });
 
-=======
->>>>>>> 15fd9213381c1e1613baf4bff628f4e811363e0f
 web.get("/clear", async (req, res) => {
     const a = await cart.total()
     if (a != 0){
@@ -85,7 +82,9 @@ web.get("/clear", async (req, res) => {
 //categories
 web.get("/:id", async (req, res) => {
     const items = await item.all(req.params.id);
-    res.render("home", { items })
+    const categoryLower = req.params.id;
+    const category = categoryLower[0].toUpperCase() + categoryLower.substring(1);
+    res.render("home", { items, category});
 });
 
 //displays specific product
