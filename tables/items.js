@@ -93,7 +93,6 @@ class Items {
     async allTitle() {
         const titles = [];
         const tits = await this.dbAll("SELECT title FROM Items")
-        console.log(tits)
         for (let t of tits) {
             titles.push(t.title)
         }
