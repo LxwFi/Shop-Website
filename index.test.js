@@ -43,77 +43,89 @@ describe("Catergoy Tests", () => {
         });
     });
     describe("Delete Categories", () => {
-        test("Should delete a real category", async () => {
-            await request(web).post("/items").send({
-                "title": "New Item",
-                "price": 12,
-                "description": "Neew",
-                "category": "NewCat2",
-                "image": "www.url.com"
-            });
-            const [id] = await dbAll("SELECT id FROM Categories WHERE category = 'NewCat2'")
-            const res = await request(web).delete(`/category/${id}`)
-            expect(res.statusCode).toBe(200)
-        });
-        test("ID is invalid, should 404", async () => {
+        // test("Should delete a real category", async () => {
+        //     await request(web).post("/items").send({
+        //         "title": "New Item",
+        //         "price": 12,
+        //         "description": "Neew",
+        //         "category": "NewCat2",
+        //         "image": "www.url.com"
+        //     });
+        //     const res = await request(web).delete(`/category/1`)
+        //     expect(res.statusCode).toBe(200)
+        //});
+        test("ID is invalid, should 400", async () => {
             const res = await request(web).delete(`/category/900`)
-            expect(res.statusCode).toBe(404)
-        })
-        
-    })
-
-});
-
-describe("POST /items", () => {
-    describe("Given all correct params (title, price, desc, cateogry, image)", () => {
-        test("responses with 200", async () => {
-            const response = await request(web).post("/items").send({
-                "title": "Phone",
-                "price": 120,
-                "description": "This is a phone",
-                "category": "electronics",
-                "image": "www.url.com"
-            });
-            expect(response.statusCode).toBe(200)
-        });
-        test("Gives success message", async () => {
-            const response = await request(web).post("/items").send({
-                "title": "Phone",
-                "price": 120,
-                "description": "This is a phone",
-                "category": "electronics",
-                "image": "www.url.com"
-            });
-            expect(response.headers['content-type']).toEqual("text/plain; charset=utf-8");
-        });
-        test("Adds to database", async () => {
-            await request(web).post("/items").send({ "title": "Phone", "price": 120, "description": "This is a phone", "category": "electronics", "image": "www.url.com" });
-            const [items] = await item.dbAll(`SELECT * FROM Items WHERE title = "Phone" AND price = 120 AND desc = "This is a phone" AND category = (SELECT ID FROM Categories WHERE Category = "electronics") AND imageURL = "www.url.com"`);
-            expect([items].length).toBeGreaterThan(0);
+            expect(res.statusCode).toBe(400)
         });
     });
 });
 
-describe("POST /cart/:id", () => {
-    test("Should add item ID to cart", async () => {
-        await request(web).post("/items").send({
-            "title": "Post",
-            "price": 1,
-            "description": "Post",
-            "category": "electronics",
-            "image": "www.url.com"
+describe("Items Tests", () => {
+    describe("POST /items", () => {
+        describe("Given all correct params (title, price, desc, cateogry, image)", () => {
+            test("responses with 200", async () => {
+                const response = await request(web).post("/items").send({
+                    "title": "Phone",
+                    "price": 120,
+                    "description": "This is a phone",
+                    "category": "electronics",
+                    "image": "www.url.com"
+                });
+                expect(response.statusCode).toBe(200)
+            });
+            test("Gives success message", async () => {
+                const response = await request(web).post("/items").send({
+                    "title": "Phone",
+                    "price": 120,
+                    "description": "This is a phone",
+                    "category": "electronics",
+                    "image": "www.url.com"
+                });
+                expect(response.headers['content-type']).toEqual("text/plain; charset=utf-8");
+            });
+            test("Adds to database", async () => {
+                await request(web).post("/items").send({ "title": "Phone", "price": 120, "description": "This is a phone", "category": "electronics", "image": "www.url.com" });
+                const [items] = await item.dbAll(`SELECT * FROM Items WHERE title = "Phone" AND price = 120 AND desc = "This is a phone" AND category = (SELECT ID FROM Categories WHERE Category = "electronics") AND imageURL = "www.url.com"`);
+                expect([items].length).toBeGreaterThan(0);
+            });
         });
-        const res = await request(web).post("/cart/1");
-        expect(res.statusCode).toBe(200);
-        const [da] = await dbAll("SELECT * FROM Basket")
-        expect([da].length).toBeGreaterThan(0);
-    })
+        describe("Given no params / missing params, should 400", () => {
+            test();
+        })
+    });
 })
 
-describe("GET /cartValues", () => {
-    test("Should return values from the cart", async () => {
-        const res = await request(web).get("/cartValues")
-        expect(res.statusCode).toBe(200);
-        expect(res.headers['content-type']).toEqual(expect.stringContaining("json"));
+
+describe("Cart Tests", () => {
+    describe("POST /cart/:id", () => {
+        test("Should add item ID to cart", async () => {
+            await request(web).post("/items").send({
+                "title": "Post",
+                "price": 1,
+                "description": "Post",
+                "category": "electronics",
+                "image": "www.url.com"
+            });
+            const res = await request(web).post("/cart/1");
+            expect(res.statusCode).toBe(200);
+            const [da] = await dbAll("SELECT * FROM Basket")
+            expect([da].length).toBeGreaterThan(0);
+        })
     })
+    describe("GET /cartValues", () => {
+        test("Should return values from the cart", async () => {
+            const res = await request(web).get("/cartValues")
+            expect(res.statusCode).toBe(200);
+            expect(res.headers['content-type']).toEqual(expect.stringContaining("json"));
+        })
+    })
+    // describe("DELETE /clear", () => {
+    //     test("Clears the entire cart", async () => {
+    //         const res = await request(web).delete("/clear");
+    //         const [exist] = await dbAll("SELECT * FROM Basket")
+    //         expect(res.statusCode).toBe(200)
+    //         expect(exist).toEqual('undefined')
+    //     })
+    // })
 })

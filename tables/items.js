@@ -90,6 +90,19 @@ class Items {
         // Returns an object of an item given the id param
         return await this.dbAll("SELECT * FROM Items WHERE id = (?)", [id])
     }
+    async allTitle() {
+        const titles = [];
+        const tits = await this.dbAll("SELECT title FROM Items")
+        console.log(tits)
+        for (let t of tits) {
+            titles.push(t.title)
+        }
+        return titles
+    }
+    async titleToID(title) {
+        const [id] = await this.dbAll("SELECT id FROM Items WHERE title = (?)", [title])
+        return id.id
+    }
 
     
 }
