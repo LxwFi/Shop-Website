@@ -56,6 +56,24 @@ text-decoration: none;
     margin-bottom: 10px;
   }
 
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 1800px) {
+  .column {
+    width: 50%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 1000px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
 
   .card-columns .card-body {
     height: 100px;
@@ -95,20 +113,27 @@ h1{
 
 #NavCentre{
   position: absolute;
-  left: 40%;
+  left: 35%;
+  text-transform: capitalize;
 }
 
 /*Product page*/
 #productImage{
-  position: absolute;
+
   top: 10%;
   left: 5%;
   flex-basis: 40%;
 }
 
+.vertical-line{
+  display: inline-block;
+  border-left: 1px solid #ccc;
+  margin: 0 20px;
+  height: 500px;
+}
+
+
 .text {
-  position: absolute;
-  top: 25%;
-  left: 28%;
+  position: relative;
   font-size: 20px;
 }
