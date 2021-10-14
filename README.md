@@ -21,7 +21,7 @@ Running the website on your local machine is super simple, simply download the p
 
 ## Features
 
-* (Write about categories)
+* When a category is added via the items page, it is displayed on the nav bar
 * Persistent shopping cart when the website is closed
 * "Buy" feature that removes items from the database after being bought
 * Admin panel with login to add products and change descriptions
