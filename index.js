@@ -44,6 +44,11 @@ web.get("/cart", async (req, res) => {
     res.render("cart", { items, total });
 });
 
+web.get("/cartValues", async (req, res) => {
+    const items = await cart.getItems();
+    res.send(items)
+});
+
 //"purchase" function for the website
 web.delete("/clear", async (req, res) => {
     const a = await cart.total()
