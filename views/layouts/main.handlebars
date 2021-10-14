@@ -30,10 +30,14 @@
                 </div>
                 <li>
                     <div id="basket">
-                        <a href="/cart">
+                        <form action="/cart">
+                            <button src="https://cdn.onlinewebfonts.com/svg/img_460503.png" onclick="fetch('/cart', {method: 'GET'})">Cart</button>
+                        </form>
+
+                        {{!-- <a href="/cart">
                             Cart
                             <img src="https://cdn.onlinewebfonts.com/svg/img_460503.png">
-                        </a>
+                        </a> --}}
                     </div>
                 </li>
             </ul>  

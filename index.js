@@ -45,22 +45,6 @@ web.get("/cart", async (req, res) => {
     res.render("cart", { items, total });
 });
 
-<<<<<<< HEAD
-web.get("/cartValues", async (req, res) => {
-    const items = await cart.getItems();
-    res.send(items)
-});
-
-//"purchase" function for the website
-web.delete("/clear", async (req, res) => {
-    const a = await cart.total()
-    await cart.clear();
-    console.log("Purchased with total " + a);
-    res.sendStatus(200);
-});
-
-=======
->>>>>>> 15fd9213381c1e1613baf4bff628f4e811363e0f
 web.get("/clear", async (req, res) => {
     const a = await cart.total()
     if (a != 0){
