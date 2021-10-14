@@ -172,8 +172,9 @@ web.get("/:id", async (req, res) => {
 });
 
 //delete category (deletes all items in a category)
-web.delete("/category/:id", (req, res) => {
-    if (req.params.id) {
+web.delete("/category/:id", async (req, res) => {
+    const a = await cat.name(req.params.id);
+    if (req.params.id && a != undefined ) {
         cat.remove(req.params.id);
         console.log("Deleting category with id " + req.params.id);
         res.sendStatus(200);
@@ -181,6 +182,7 @@ web.delete("/category/:id", (req, res) => {
     }
     res.sendStatus(400);
 });
+
 
 
 // MISC

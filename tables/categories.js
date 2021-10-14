@@ -51,6 +51,9 @@ class Categories {
     async name(id) {
         // Returns the name of a category via the param id
         const [n] = await this.dbAll("SELECT category FROM Categories WHERE id = (?)", [id])
+        if (n == undefined){
+            return;
+        }
         return n.category
     }
 }
