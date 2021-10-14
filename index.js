@@ -45,6 +45,19 @@ web.get("/cart", async (req, res) => {
     res.render("cart", { items, total });
 });
 
+web.get("/cartValues", async (req, res) => {
+    const items = await cart.getItems();
+    res.send(items);
+});
+
+//"purchase" function for the website
+web.delete("/clear", async (req, res) => {
+    const a = await cart.total()
+    await cart.clear();
+    console.log("Purchased with total " + a);
+    res.sendStatus(200);
+});
+
 web.get("/clear", async (req, res) => {
     const a = await cart.total()
     if (a != 0){
@@ -69,7 +82,9 @@ web.get("/clear", async (req, res) => {
 //categories
 web.get("/:id", async (req, res) => {
     const items = await item.all(req.params.id);
-    res.render("home", { items })
+    const categoryLower = req.params.id;
+    const category = categoryLower[0].toUpperCase() + categoryLower.substring(1);
+    res.render("home", { items, category});
 });
 
 //displays specific product

@@ -4,15 +4,10 @@
 
 <Body>   
     <h1 id="header">
-        Template
+        {{this.category}}
     </h1>
 
     <!-- Change h1 "Template" to category ID --->
-    {{#each items}}
-        <script>
-            document.getElementById("header").innerText = {{this.category}};
-        </script>
-    {{/each}}
     
     <br> 
 
@@ -31,8 +26,6 @@
     </div>
 
 <script>
-
-
     //Change to "Home Page" if there are more than 15 items
     let count = 0;
     {{#each items}}
@@ -42,6 +35,5 @@
         const header = document.getElementById("header");
         header.innerText="Home Page";
     }
-
 </script>
 </Body>

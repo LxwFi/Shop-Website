@@ -1,8 +1,9 @@
 <!--main.handlebars-->
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
+    <script src="/javascript/main.js"></script>
+
     <title>Example App</title>
 </head>
 <body>
@@ -30,10 +31,7 @@
                 </div>
                 <li>
                     <div id="basket">
-                        <form action="/cart">
-                            <button src="https://cdn.onlinewebfonts.com/svg/img_460503.png" onclick="fetch('/cart', {method: 'GET'})">Cart</button>
-                        </form>
-
+                        <button src="https://cdn.onlinewebfonts.com/svg/img_460503.png" onclick= "goFetch()">Cart</button>
                         {{!-- <a href="/cart">
                             Cart
                             <img src="https://cdn.onlinewebfonts.com/svg/img_460503.png">
@@ -45,6 +43,7 @@
     </header>
 
     {{{body}}}
+
 
 </body>
 </html>
