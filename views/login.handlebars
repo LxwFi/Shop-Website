@@ -1,0 +1,58 @@
+<head>
+    <link rel="stylesheet" href="\stylesheets\styling.css">
+    <title>Your Basket</title>
+</head>
+
+<body>
+    <h1 id="admin">Admin</h1>
+
+    <h2>Create new product</h2>
+    <form action="/items" method="{ method: 'POST' }">
+        <label for="name">Product Name</label>
+        <input type="text" name="name" id="name" required>
+        <br>
+        <label for="price">Product Price</label>
+        <input type="text" name="price" id="price" required>
+        <br>
+        <label for="description">Product Description</label>
+        <input type="text" name="description" id="description" required>
+        <br>
+        <label for="category">Product Category</label>
+        <input type="dr" name="category" id="category" required>
+        <br>
+        <label for="image">Product Image</label>
+        <input type="dr" name="image" id="image" required>
+        <br>
+        <input type="submit" value="submit">
+    </form>
+
+
+    <h2>Delete Product</h2>
+
+    <form action="/items" method="{ method: 'DELETE' }">
+        <label for="name">Product Name</label>
+        <select name="name" id="desc-name"required>
+            <option value="name">{{this.name}}</option>
+        </select >
+        <br>
+
+        <input type="submit" value="submit">
+    </form>
+
+    <h2>New Description</h2>
+    <form action="/items" method="{ method: 'POST' }">
+        <label for="name">Product Name</label>
+        <select name="name" id="desc-name"required>
+            <option value="name">{{this.name}}</option>
+        </select >
+
+        <br>
+
+        <label for="description">Product Description</label>
+        <input type="text" name="description" id="description" required>
+
+        <br>
+
+        <input type="submit" value="submit">
+    </form>
+</body>
