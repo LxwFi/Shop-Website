@@ -21,6 +21,7 @@ const {
     allowInsecurePrototypeAccess,
 } = require("@handlebars/allow-prototype-access");
 const { clear } = require('console');
+const { title } = require('process');
 const handlebars = expressHandlebars({
     handlebars: allowInsecurePrototypeAccess(Handlebars),
 });
@@ -29,6 +30,32 @@ web.set("view engine", "handlebars");
 web.set('views', path.join(__dirname, 'views'));
 web.use(express.urlencoded({ extended: true }));
 web.use(express.json());
+
+
+
+
+
+//testing
+web.get("/test", async (req, res) => {
+    const a = await item.allTitle();
+    // const b = await item.titleToID("BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats");
+    // for (i in a){
+    //     console.log(a[i])
+    //     let b = await item.titleToID(a[i]);
+    //     console.log(b);
+    // }
+    // console.log(b);
+    res.sendStatus(200);
+});
+
+web.get("/test/:id", async (req, res) => {
+    const a = await item.allTitle();
+    const b = await item.titleToID(a[req.params.id]);
+    // await item.remove(b);
+    console.log(a[req.params.id]);
+    console.log(b);
+    res.sendStatus(200);
+});
 
 
 
@@ -47,7 +74,7 @@ web.get("/cart", async (req, res) => {
     const items = await cart.getItems()
     const total = await cart.total();
     const categories = await cat.all();
-    res.render("cart", {items, total, categories});
+    res.render("cart", { items, total, categories });
 });
 
 //used to check if cart is empty
@@ -64,9 +91,9 @@ web.delete("/clear", async (req, res) => {
 });
 
 //renders "clear"
-web.get("/clear", async (req, res) =>{
+web.get("/clear", async (req, res) => {
     const categories = await cat.all();
-    res.render("clear", {categories});
+    res.render("clear", { categories });
 });
 
 //add to cart
@@ -115,6 +142,7 @@ web.get("/login", async (req, res) => {
     if (!(password === process.env.password)) {   //set password manually here or in your own .env file
         return reject()
     }
+    console.log(username + " has logged in");
     res.render("login")
 });
 
@@ -124,7 +152,7 @@ web.get("/login", async (req, res) => {
 web.get("/product/:id", async (req, res) => {
     const items = await item.get(req.params.id);
     const categories = await cat.all();
-    res.render("product", { items , categories});
+    res.render("product", { items, categories });
 });
 
 //add new items, creates a new category if it doesnt exist
@@ -174,12 +202,13 @@ web.get("/:id", async (req, res) => {
 //delete category (deletes all items in a category)
 web.delete("/category/:id", async (req, res) => {
     const a = await cat.name(req.params.id);
-    if (req.params.id && a != undefined ) {
+    if (req.params.id && a != undefined) {
         cat.remove(req.params.id);
         console.log("Deleting category with id " + req.params.id);
         res.sendStatus(200);
         return;
     }
+    console.log("Category with ID " + req.params.id + " doesn't exist")
     res.sendStatus(400);
 });
 
