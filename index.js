@@ -34,24 +34,30 @@ web.use(express.json());
 //main page + console log to show if someone is visiting
 web.get("/", async (req, res) => {
     const items = await item.all();
+    const categories = cat.all();
     console.log("Someone is visiting the website...");
-    res.render("home", { items });
+    res.render("home", { items, categories });
 });
 
 
 web.get("/login", (req, res) => {
-    password = process.env.password;
-    console.log(password);
-    // res.render("login")
+    const reject = () => {
+        res.setHeader('www-authenticate', 'Basic')
+        res.sendStatus(401)
+    }
+    const authorization = req.headers.authorization
 
+    if (!authorization) {
+        return reject()
+    }
 
+    const [username, password] = Buffer.from(authorization.replace('Basic ', ''), 'base64').toString().split(':')
 
+    if (!(password === process.env.password)) {   //set password manually here or in your own .env file
+        return reject()
+    }
 
-
-
-
-
-
+    res.send('Welcome ' + username + " to the web")
 });
 
 
@@ -60,7 +66,7 @@ web.get("/cart", async (req, res) => {
     const items = await cart.getItems()
     const total = await cart.total();
     const message = "Cart is empty";
-    res.render("cart", { items, total, message });
+    res.render("cart", { items, total});
 });
 
 web.get("/cartValues", async (req, res) => {
@@ -72,7 +78,7 @@ web.get("/cartValues", async (req, res) => {
 web.delete("/clear", async (req, res) => {
     const a = await cart.total();
     await cart.clear();
-    console.log("Purchased items worth " + a);
+    console.log("Purchased items worth £" + a);
     res.render("clear");
 });
 
