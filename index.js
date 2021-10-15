@@ -80,13 +80,6 @@ web.post("/cart/:id", (req, res) => {
     res.sendStatus(400);
 });
 
-//remove all from cart
-web.delete("/cart", (req, res) => {
-    cart.clear();
-    res.sendStatus(200);
-    return;
-})
-
 // LOGIN
 
 //takes you to login
@@ -106,7 +99,7 @@ web.get("/login", async (req, res) => {
     }
     const items = await item.allTitle();
     console.log(username + " has logged in");
-    res.render("login", {items})
+    res.render("login", {items, categories})
 });
 
 // ITEMS
@@ -150,17 +143,6 @@ web.patch("/desc/:id", async (req, res) => {
     res.sendStatus(400);
 });
 
-//delete item 
-web.delete("/item/:id", (req, res) => {
-    if (req.params.id) {
-        item.remove(req.params.id);
-        console.log("Deleting item with id " + req.params.id);
-        res.sendStatus(200);
-        return;
-    }
-    res.sendStatus(400);
-});
-
 //get item description
 web.get("/desc/:title", async (req, res) => {
     if (req.params.title) {
@@ -182,14 +164,14 @@ web.get("/:id", async (req, res) => {
 
 //delete category (deletes all items in a category)
 web.delete("/category/:id", async (req, res) => {
-    const a = await cat.name(req.params.id);
-    if (req.params.id && a != undefined) {
-        cat.remove(req.params.id);
-        console.log("Deleting category with id " + req.params.id);
+    const iid = await cat.titleToID(req.params.id);
+    if (req.params.id) {
+        await cat.remove(iid);
+        console.log("Deleting category with id " + iid);
         res.sendStatus(200);
         return;
     }
-    console.log("Category with ID " + req.params.id + " doesn't exist")
+    console.log("Category with ID " + iid + " doesn't exist")
     res.sendStatus(400);
 });
 
