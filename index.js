@@ -80,17 +80,6 @@ web.post("/cart/:id", (req, res) => {
     res.sendStatus(400);
 });
 
-//remove from cart
-web.delete("/cart/:id", (req, res) => {
-    if (req.params.id) {
-        cart.remove(req.params.id);
-        console.log("Deleting from cart with id " + req.params.id);
-        res.sendStatus(200);
-        return;
-    }
-    res.sendStatus(400);
-});
-
 //remove all from cart
 web.delete("/cart", (req, res) => {
     cart.clear();

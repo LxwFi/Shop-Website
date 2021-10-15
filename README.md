@@ -47,7 +47,7 @@ We decided to focus on function over form, and because we were constantly adding
 ## Roles and responsibilities 
 
 **Back end**
-* Tymoteusz (LxwFi) - Express + bug testing
+* Tymoteusz (LxwFi) - Express + debugging
 * William - Database manager + supertest
 
 **Front End**
