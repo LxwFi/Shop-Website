@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="../stylesheets/styling.css">
     <script src="/javascript/main.js"></script>
 
     <title>Example App</title>
@@ -12,21 +13,23 @@
         <nav> 
             <ul>
                 <li>  
-                    <a href="/"><img src="https://th.bing.com/th/id/R.fdd7a1d520d752a8e90658e615bd64b9?rik=GhhkQmM3HbOVsw&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_158445.png&ehk=FoEG8SH6nP%2b%2bVMArDv4EtYP0O5RCX2w%2fRZQGuvXY69I%3d&risl=&pid=ImgRaw&r=0"></a>
+                    <form id="home" action="/">
+                        <input type="image" src="https://th.bing.com/th/id/R.fdd7a1d520d752a8e90658e615bd64b9?rik=GhhkQmM3HbOVsw&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_158445.png&ehk=FoEG8SH6nP%2b%2bVMArDv4EtYP0O5RCX2w%2fRZQGuvXY69I%3d&risl=&pid=ImgRaw&r=0" id="submit" alt="Home" width="30" height="30">
+                    </form>                    
                 </li> 
                 <div id="NavCentre">
                         {{#each categories}}
                             <li>  
-                                <a href="/{{this.category}}"> {{this.category}} </a>  
+                                <a id="categories" href="/{{this.category}}"> {{this.category}} </a>  
                             </li>  
                         {{/each}}
                 </div>
                 <li>
-                    <div id="basket">
-                        <button onclick= "goFetch()">Cart</button>
-                        <img src="https://cdn.onlinewebfonts.com/svg/img_460503.png">
-                    </div>
+                    <form id="cart" action="" onclick= "goFetch()">
+                        <input type="image" src="https://cdn.onlinewebfonts.com/svg/img_460503.png" id="submit" alt="Submit" width="30" height="30" style="float:right">
+                    </form>
                 </li>
+
             </ul>  
         </nav>  
     </header>
