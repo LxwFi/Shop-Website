@@ -172,6 +172,14 @@ web.delete("/item/:id", (req, res) => {
     res.sendStatus(400);
 });
 
+//get item description
+web.get("/desc/:title", async (req, res) => {
+    if (req.params.title) {
+        const [it] = await item.get(await item.titleToID(req.params.title));
+        res.send(it.desc);
+    }
+})
+
 // CATEGORIES
 
 //specific categories

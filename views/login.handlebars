@@ -40,7 +40,7 @@
 
     <h2>New Description</h2>
         <label for="name">Product Name</label>
-        <select name="name" id="desc-name"required>
+        <select name="name" id="desc-name" onchange="autoInput()" required>
             {{#each items}}
             <option value="{{this}}">{{this}}</option>
             {{/each}}

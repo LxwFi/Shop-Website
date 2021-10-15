@@ -1,3 +1,10 @@
+
+async function autoInput() {
+    const descSelector = document.getElementById("desc-name")
+    const res = await fetch(`/desc/${descSelector.value}`, { method: "GET" });
+    document.getElementById("description").value = await res.text()
+}
+
 //Function to change description
 async function descChange() {
     var selected = document.getElementById("desc-name");
