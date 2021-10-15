@@ -59,11 +59,18 @@ class Items {
         // Checks if it exists and if does, removes it from database
         const [exist] = await this.dbAll("SELECT * FROM Items WHERE id = (?)",
             [id])
+        const cat = await this.dbAll("SELECT * FROM Items WHERE category = (SELECT category FROM Items WHERE id = (?))", [id])
+        const catid = await this.dbAll("SELECT category FROM Items WHERE id = (?)")
         if (typeof exist !== 'undefined') {
             this.database.serialize(() => {
                 this.database.run(`
                 DELETE FROM Items WHERE id = (?)`, [id])
             });
+        }
+        console.log(exist.category)
+        if (cat.length <= 1) {
+            const catty = new Categories(this.database)
+            await catty.remove(exist.category)
         }
 
     }
