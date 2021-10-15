@@ -156,6 +156,12 @@ web.get("/product/:id", async (req, res) => {
     res.render("product", { items, categories });
 });
 
+web.delete("/titleToID/:title", async (req, res) => {
+    const iid = await item.titleToID(req.params.title)
+    await item.remove(iid)
+    res.sendStatus(200)
+})
+
 //add new items, creates a new category if it doesnt exist
 web.post("/items", async (req, res) => {
     const { title, price, description, category, image } = req.body
@@ -167,11 +173,12 @@ web.post("/items", async (req, res) => {
 });
 
 //change the description of an item
-web.patch("/desc/:id", (req, res) => {
+web.patch("/desc/:id", async (req, res) => {
     if (req.params.id) {
         const { desc } = req.body
-        item.descChange(req.params.id, desc);
-        console.log("Changing desc for item with ID " + req.params.id);
+        const iid = await item.titleToID(req.params.id)
+        item.descChange(iid, desc);
+        console.log("Changing desc for item with ID " + iid);
         res.sendStatus(200);
         return;
     }
