@@ -102,8 +102,6 @@ class Items {
         const [id] = await this.dbAll("SELECT id FROM Items WHERE title = (?)", [title])
         return id.id
     }
-
-    
 }
 
 module.exports = Items;
