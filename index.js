@@ -32,33 +32,6 @@ web.use(express.urlencoded({ extended: true }));
 web.use(express.json());
 
 
-
-
-
-//testing
-web.get("/test", async (req, res) => {
-    const a = await item.allTitle();
-    // const b = await item.titleToID("BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats");
-    // for (i in a){
-    //     console.log(a[i])
-    //     let b = await item.titleToID(a[i]);
-    //     console.log(b);
-    // }
-    // console.log(b);
-    res.sendStatus(200);
-});
-
-web.get("/test/:id", async (req, res) => {
-    const a = await item.allTitle();
-    const b = await item.titleToID(a[req.params.id]);
-    // await item.remove(b);
-    console.log(a[req.params.id]);
-    console.log(b);
-    res.sendStatus(200);
-});
-
-
-
 //main page + console log to show if someone is visiting
 web.get("/", async (req, res) => {
     const items = await item.all();
@@ -156,9 +129,11 @@ web.get("/product/:id", async (req, res) => {
     res.render("product", { items, categories });
 });
 
+//deletes item (used in admin page)
 web.delete("/titleToID/:title", async (req, res) => {
-    const iid = await item.titleToID(req.params.title)
-    await item.remove(iid)
+    const iid = await item.titleToID(req.params.title);
+    console.log("Deleting item with ID " + iid);
+    await item.remove(iid);
     res.sendStatus(200)
 })
 
@@ -168,6 +143,7 @@ web.post("/items", async (req, res) => {
     if (!title || !price || !description || !category || !image) {
         res.sendStatus(400);
     }
+    console.log("Adding new item with title " + title + " under the category " + category);
     item.add(title, price, description, category, image);
     res.sendStatus(200);
 });
