@@ -146,18 +146,35 @@ h1{
   width: auto;
 }
 
+/*Resizing card in product page*/
 
-
-.vertical-line{
-  display: inline-block;
-  border-left: 1px solid #ccc;
-  margin: 0 20px;
-  height: 500px;
+@media screen and (max-width: 1500px) {
+  #productImage .card {
+    margin-left: 30%;      
+    margin-right: 30%;
+    width: auto;
+  }
 }
 
+@media screen and (max-width: 1300px) {
+  #productImage .card {
+    margin-left: 20%;      
+    margin-right: 20%;
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #productImage .card {
+    margin-left: 0%;      
+    margin-right: 0%;
+    width: auto;
+  }
+}
+
+/**/
 
 .text {
-  position: relative;
   font-size: 20px;
 }
 
