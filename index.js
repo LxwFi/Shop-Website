@@ -142,8 +142,9 @@ web.get("/login", async (req, res) => {
     if (!(password === process.env.password)) {   //set password manually here or in your own .env file
         return reject()
     }
+    const items = await item.allTitle();
     console.log(username + " has logged in");
-    res.render("login")
+    res.render("login", {items})
 });
 
 // ITEMS
