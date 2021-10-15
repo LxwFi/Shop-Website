@@ -66,7 +66,6 @@ class Items {
                 DELETE FROM Items WHERE id = (?)`, [id])
             });
         }
-        console.log(exist.category)
         if (cat.length <= 1) {
             const catty = new Categories(this.database)
             await catty.remove(exist.category)

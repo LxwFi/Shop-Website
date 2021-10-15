@@ -32,17 +32,6 @@ class Basket {
             })
         }
     }
-    async remove(item) {
-        // Takes in the param of the id of item being removed from basket
-        if (isNaN(item)) { throw "Is not a number" }
-        const [exist] = await this.dbAll("SELECT * FROM Basket WHERE item = (?)", [item])
-        if (typeof exist !== 'undefined') {
-            this.database.serialize(() => {
-                this.database.run(`
-                DELETE FROM Basket WHERE item = (?)`, [item])
-            })
-        }
-    }
     async getItems() {
         // Returns all items in a list of objects in the basket
         const ret = [];

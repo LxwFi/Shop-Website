@@ -56,6 +56,10 @@ class Categories {
         }
         return n.category
     }
+    async titleToID(title) {
+        const [id] = await this.dbAll("SELECT id FROM Categories WHERE category = (?)", [title])
+        return id.id
+    }
 }
 
 module.exports = Categories;
