@@ -60,7 +60,6 @@ class Items {
         const [exist] = await this.dbAll("SELECT * FROM Items WHERE id = (?)",
             [id])
         const cat = await this.dbAll("SELECT * FROM Items WHERE category = (SELECT category FROM Items WHERE id = (?))", [id])
-        const catid = await this.dbAll("SELECT category FROM Items WHERE id = (?)")
         if (typeof exist !== 'undefined') {
             this.database.serialize(() => {
                 this.database.run(`
