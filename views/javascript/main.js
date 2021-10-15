@@ -51,11 +51,17 @@ async function delItem() {
     location.reload();
 }
 
+//Function to delete categories
+async function delCat() {
+    var selected = document.getElementById("del-cat");
+    await fetch(`/category/${selected.value}`, { method: 'DELETE' });
+    location.reload();
+}
+
 //This checks if the cart is empty, and prevents the user going to the cart if so
 async function goFetch() {
     const response = await fetch("/cartValues", { method: "GET" });
     const cartValues = response.text();
-    console.log(await cartValues);
     if (await cartValues != "[]") {
         window.location.replace("http://localhost:3000/cart");
         return;
