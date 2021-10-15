@@ -137,3 +137,11 @@ h1{
   position: relative;
   font-size: 20px;
 }
+
+/* Cart Button */
+
+#cart {
+  float: right;
+  width: 30px;
+  height: 30px;
+}
