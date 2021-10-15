@@ -1,3 +1,11 @@
+/* CSS HEX
+--prussian-blue: #002642ff;
+--claret: #840032ff;
+--gamboge: #e59500ff;
+--gainsboro: #e5dadaff;
+--rich-black-fogra-29: #02040fff; */
+
+
 body   
 {  
 height: 125vh;  
@@ -159,4 +167,8 @@ h1{
   float: right;
   width: 30px;
   height: 30px;
+}
+
+a {
+  text-decoration: none;
 }
