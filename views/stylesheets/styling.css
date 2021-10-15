@@ -16,7 +16,8 @@ top: 0;
 height: 40px;  
 display: flex;  
 align-items: center;  
-box-shadow: 0 0 25px 0 black;  
+box-shadow: 0 0 25px 0 black;
+
 }  
 header * {  
 display: inline;  
@@ -27,7 +28,9 @@ margin: 20px;
 header li a {  
 color: blue;  
 text-decoration: none;  
-}  
+} 
+
+
 
 * {
     box-sizing: border-box;
@@ -112,11 +115,13 @@ h1{
 }
 
 #NavCentre{
-  position: absolute;
-  left: 35%;
   text-transform: capitalize;
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-
 /*Product page*/
 #productImage{
 
