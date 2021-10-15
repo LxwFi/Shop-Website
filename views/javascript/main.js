@@ -1,10 +1,4 @@
-// //const Items = require("../../tables/items");
-// import Items from "../../tables/items";
-// // const sqlite3 = require("sqlite3");
-// import { sqlite3 } from "sqlite3";
-// const db = new sqlite3.Database("../../data.db");
-// const item = new Items(db);
-
+//Function to change description
 async function descChange() {
     var selected = document.getElementById("desc-name");
     var newDesc = document.getElementById("description");
@@ -14,23 +8,48 @@ async function descChange() {
         body: JSON.stringify(req),
         headers: {
             "Content-Type": "application/json"
-          }
+        }
     });
     location.reload();
 }
 
+//Function to add new items
+async function itemAdd() {
+    var title = document.getElementById("name");
+    var price = document.getElementById("price");
+    var description = document.getElementById("desc");
+    var category = document.getElementById("category");
+    var image = document.getElementById("image");
+    var req = {
+        "title": `${title.value}`,
+        "price": price.value,
+        "description": `${description.value}`,
+        "category": `${category.value}`,
+        "image": `${image.value}`
+    }
+    await fetch(`/items`, {
+        method: "POST",
+        body: JSON.stringify(req),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    location.reload();
+}
+
+//Function to delete items
 async function delItem() {
     var selected = document.getElementById("del-item");
     await fetch(`/titleToID/${selected.value}`, { method: 'DELETE' });
     location.reload();
 }
 
+//This checks if the cart is empty, and prevents the user going to the cart if so
 async function goFetch() {
-    const response = await fetch("/cartValues", { method: "GET" })
+    const response = await fetch("/cartValues", { method: "GET" });
     const cartValues = response.text();
     console.log(await cartValues);
     if (await cartValues != "[]") {
-        console.log("yeah");
         window.location.replace("http://localhost:3000/cart");
         return;
     } else {
