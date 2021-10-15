@@ -38,7 +38,7 @@ Running the website on your local machine is super simple, simply download the p
 
 ## Design decisions
 
-(Frontend writes here)
+We decided to focus on function over form, and because we were constantly adding features we decided it would be easier to just make the website minimalistic so that if we ever needed to implement something it would go smoothly. It also just looks nice being more minimal
 
 ## Database Design
 

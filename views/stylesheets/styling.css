@@ -131,12 +131,14 @@ h1{
   transform: translate(-50%, -50%);
 }
 /*Product page*/
-#productImage{
 
-  top: 10%;
-  left: 5%;
-  flex-basis: 40%;
+#productImage .card{
+  margin-left: 35%;      
+  margin-right: 35%;
+  width: auto;
 }
+
+
 
 .vertical-line{
   display: inline-block;
